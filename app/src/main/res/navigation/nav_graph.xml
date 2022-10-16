@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/transactionFragment">
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.vuhm.moony.presentation.ui.history.HistoryFragment"
+        android:label="HistoryFragment" />
+    <fragment
+        android:id="@+id/savingFragment"
+        android:name="com.vuhm.moony.presentation.ui.saving.SavingFragment"
+        android:label="SavingFragment" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.vuhm.moony.presentation.ui.setting.SettingFragment"
+        android:label="SettingFragment" />
+    <fragment
+        android:id="@+id/transactionFragment"
+        android:name="com.vuhm.moony.presentation.ui.transaction.TransactionFragment"
+        android:label="TransactionFragment" />
+</navigation>

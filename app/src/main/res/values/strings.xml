@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Moony</string>
+
+    <string name="transaction">Transaction</string>
+    <string name="saving">Saving</string>
+    <string name="history">History</string>
+    <string name="setting">Setting</string>
 </resources>

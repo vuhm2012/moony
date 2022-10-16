@@ -9,6 +9,10 @@ buildscript {
         rx_java = "2.2.21"
         rx_android = "2.2.1"
     }
+    dependencies {
+        def nav_version = "2.5.2"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+    }
     repositories {
         maven {
             url 'https://jitpack.io'
