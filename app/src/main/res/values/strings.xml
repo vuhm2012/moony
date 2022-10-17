@@ -5,4 +5,7 @@
     <string name="saving">Saving</string>
     <string name="history">History</string>
     <string name="setting">Setting</string>
+
+    <string name="next">Next</string>
+    <string name="prev">Prew</string>
 </resources>

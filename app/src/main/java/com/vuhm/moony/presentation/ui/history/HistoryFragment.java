@@ -5,6 +5,9 @@ import android.os.Bundle;
 import com.vuhm.moony.R;
 import com.vuhm.moony.presentation.BaseFragment;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class HistoryFragment extends BaseFragment {
     @Override
     public int getLayoutId() {
