@@ -5,8 +5,8 @@
     app:startDestination="@id/transactionFragment">
 
     <fragment
-        android:id="@+id/historyFragment"
-        android:name="com.vuhm.moony.presentation.ui.history.HistoryFragment"
+        android:id="@+id/categoryFragment"
+        android:name="com.vuhm.moony.presentation.ui.category.CategoryFragment"
         android:label="HistoryFragment" />
     <fragment
         android:id="@+id/savingFragment"

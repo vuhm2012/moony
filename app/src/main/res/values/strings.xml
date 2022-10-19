@@ -3,7 +3,7 @@
 
     <string name="transaction">Transaction</string>
     <string name="saving">Saving</string>
-    <string name="history">History</string>
+    <string name="category">Category</string>
     <string name="setting">Setting</string>
 
     <string name="next">Next</string>

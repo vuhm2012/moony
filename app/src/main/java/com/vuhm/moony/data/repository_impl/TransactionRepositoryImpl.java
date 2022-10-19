@@ -19,7 +19,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     private final TransactionMapper transactionMapper;
 
     @Inject
-    TransactionRepositoryImpl(TransactionDao transactionDao, TransactionMapper transactionMapper) {
+    public TransactionRepositoryImpl(TransactionDao transactionDao, TransactionMapper transactionMapper) {
         this.transactionDao = transactionDao;
         this.transactionMapper = transactionMapper;
     }

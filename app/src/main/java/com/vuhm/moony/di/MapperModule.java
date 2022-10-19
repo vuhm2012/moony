@@ -1,7 +1,7 @@
 package com.vuhm.moony.di;
 
+import com.vuhm.moony.data.mapper.CategoryMapper;
 import com.vuhm.moony.data.mapper.TransactionMapper;
-import com.vuhm.moony.domain.mapper.IMapper;
 
 import javax.inject.Singleton;
 
@@ -16,8 +16,14 @@ public class MapperModule {
 
     @Singleton
     @Provides
-    IMapper provideTransactionMapper() {
+    TransactionMapper provideTransactionMapper() {
         return new TransactionMapper();
+    }
+
+    @Singleton
+    @Provides
+    CategoryMapper provideCategoryMapper() {
+        return new CategoryMapper();
     }
 
 }

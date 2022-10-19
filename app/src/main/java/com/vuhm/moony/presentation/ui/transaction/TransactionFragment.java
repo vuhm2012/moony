@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.vuhm.moony.R;
 import com.vuhm.moony.databinding.FragmentTransactionBinding;
-import com.vuhm.moony.presentation.BaseFragment;
+import com.vuhm.moony.presentation.base.BaseFragment;
 
 import dagger.hilt.android.AndroidEntryPoint;
 

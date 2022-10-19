@@ -1,4 +1,4 @@
-package com.vuhm.moony.presentation;
+package com.vuhm.moony.presentation.base;
 
 import android.content.Context;
 import android.os.Bundle;

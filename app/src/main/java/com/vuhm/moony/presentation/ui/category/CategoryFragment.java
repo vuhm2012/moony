@@ -1,17 +1,17 @@
-package com.vuhm.moony.presentation.ui.history;
+package com.vuhm.moony.presentation.ui.category;
 
 import android.os.Bundle;
 
 import com.vuhm.moony.R;
-import com.vuhm.moony.presentation.BaseFragment;
+import com.vuhm.moony.presentation.base.BaseFragment;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class HistoryFragment extends BaseFragment {
+public class CategoryFragment extends BaseFragment {
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_history;
+        return R.layout.fragment_category;
     }
 
     @Override

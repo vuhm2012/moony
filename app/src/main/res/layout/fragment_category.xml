@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/titles_font"
-            android:text="@string/history"
+            android:text="@string/category"
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -28,7 +28,7 @@
             android:src="@drawable/ic_no_data"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txt_title" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

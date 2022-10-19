@@ -3,7 +3,7 @@ package com.vuhm.moony.presentation.ui.setting;
 import android.os.Bundle;
 
 import com.vuhm.moony.R;
-import com.vuhm.moony.presentation.BaseFragment;
+import com.vuhm.moony.presentation.base.BaseFragment;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
