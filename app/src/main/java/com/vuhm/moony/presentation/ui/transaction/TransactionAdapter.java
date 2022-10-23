@@ -10,16 +10,16 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vuhm.moony.R;
-import com.vuhm.moony.core.utils.OnTransactionItemClick;
+import com.vuhm.moony.core.utils.OnItemClick;
 
 import java.util.List;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
 
     private List<String> localDataSet;
-    private OnTransactionItemClick listener;
+    private OnItemClick<String> listener;
 
-    public TransactionAdapter(List<String> localDataSet, OnTransactionItemClick listener) {
+    public TransactionAdapter(List<String> localDataSet, OnItemClick listener) {
         this.localDataSet = localDataSet;
         this.listener = listener;
     }

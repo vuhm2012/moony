@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_transaction"
+    android:id="@+id/card_saving"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -23,7 +22,7 @@
             app:tint="@color/color_red" />
 
         <TextView
-            android:id="@+id/lb_transaction_title"
+            android:id="@+id/lb_saving_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -33,35 +32,42 @@
             app:layout_constraintLeft_toRightOf="@id/img_category"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/img_transaction_type"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_expense"
-            app:layout_constraintLeft_toRightOf="@id/img_category"
-            app:layout_constraintTop_toBottomOf="@id/lb_transaction_title"
-            app:tint="@color/color_red" />
-
         <TextView
-            android:id="@+id/lb_transaction_amount"
+            android:id="@+id/lb_saving_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="- 1,222,3000"
             android:textColor="@color/color_red"
             android:textSize="16sp"
-            app:layout_constraintLeft_toRightOf="@id/img_transaction_type"
-            app:layout_constraintTop_toBottomOf="@id/lb_transaction_title" />
+            app:layout_constraintLeft_toLeftOf="@id/lb_saving_title"
+            app:layout_constraintTop_toBottomOf="@id/lb_saving_title" />
 
         <TextView
-            android:id="@+id/lb_transaction_description"
+            android:id="@+id/lb_saving_goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:text="- 1,222,3000"
+            android:textColor="@color/color_red"
+            android:textSize="16sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lb_saving_title" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/prg_saving"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/lb_saving_amount"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lb_saving_amount" />
+
+        <TextView
+            android:id="@+id/lb_saving_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="Bo tien ra de mua oto ..."
-            app:layout_constraintLeft_toRightOf="@id/img_category"
-            app:layout_constraintTop_toBottomOf="@id/img_transaction_type" />
+            app:layout_constraintLeft_toLeftOf="@id/prg_saving"
+            app:layout_constraintTop_toBottomOf="@id/prg_saving" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
