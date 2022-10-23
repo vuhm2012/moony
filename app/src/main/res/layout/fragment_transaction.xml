@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -31,6 +32,18 @@
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_add_transaction"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_button_white_rounded_corner"
+            android:elevation="3dp"
+            android:src="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="@id/txt_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/txt_title" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_totals"
@@ -74,12 +87,21 @@
                     app:layout_constraintRight_toLeftOf="@id/totals_separate"
                     app:layout_constraintTop_toBottomOf="@id/lb_range" />
 
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_income"
+                    app:layout_constraintBottom_toBottomOf="@id/lb_income_value"
+                    app:layout_constraintRight_toLeftOf="@id/lb_income_value"
+                    app:layout_constraintTop_toTopOf="@id/lb_income_value"
+                    app:tint="@color/color_green" />
+
                 <TextView
                     android:id="@+id/lb_income_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="2000000000"
+                    android:text="2,000,000,000"
                     android:textColor="@color/color_green"
                     android:textSize="14dp"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -119,12 +141,21 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/lb_range" />
 
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_expense"
+                    app:layout_constraintBottom_toBottomOf="@id/lb_expense_value"
+                    app:layout_constraintRight_toLeftOf="@id/lb_expense_value"
+                    app:layout_constraintTop_toTopOf="@id/lb_expense_value"
+                    app:tint="@color/color_red" />
+
                 <TextView
                     android:id="@+id/lb_expense_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="2000000000"
+                    android:text="2,000,000,000"
                     android:textColor="@color/color_red"
                     android:textSize="14dp"
                     app:layout_constraintLeft_toRightOf="@id/totals_separate"
@@ -158,7 +189,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_totals" />
+            app:layout_constraintTop_toBottomOf="@id/card_totals"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_transaction" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
