@@ -9,7 +9,6 @@ import androidx.room.Update;
 import com.vuhm.moony.data.entity.TransactionEntity;
 
 import java.util.List;
-import java.util.UUID;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -27,7 +26,7 @@ public interface TransactionDao {
     Completable deleteTransaction(TransactionEntity transaction);
 
     @Query("DELETE FROM `transaction` WHERE id = :transactionId")
-    Completable deleteTransactionById(UUID transactionId);
+    Completable deleteTransactionById(String transactionId);
 
     @Query("SELECT * FROM `transaction`")
     Observable<List<TransactionEntity>> getAllTransactions();

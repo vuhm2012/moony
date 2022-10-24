@@ -12,7 +12,7 @@ import java.util.UUID;
 public class CategoryEntity {
     @PrimaryKey
     @ColumnInfo(name = "id")
-    private final UUID id;
+    private final String id;
     @ColumnInfo(name = "title")
     private String title;
     @ColumnInfo(name = "icon_res_id")
@@ -25,13 +25,17 @@ public class CategoryEntity {
     private Date updatedDate;
 
     public CategoryEntity() {
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString();
         this.createdDate = Calendar.getInstance().getTime();
         this.updatedDate = Calendar.getInstance().getTime();
     }
 
-    public CategoryEntity(String title, int iconResId, boolean isIncome) {
-        this.id = UUID.randomUUID();
+    public CategoryEntity(
+            String title,
+            int iconResId,
+            boolean isIncome
+    ) {
+        this.id = UUID.randomUUID().toString();
         this.title = title;
         this.iconResId = iconResId;
         this.isIncome = isIncome;
@@ -39,7 +43,14 @@ public class CategoryEntity {
         this.updatedDate = Calendar.getInstance().getTime();
     }
 
-    public CategoryEntity(UUID id, String title, int iconResId, boolean isIncome, Date createdDate, Date updatedDate) {
+    public CategoryEntity(
+            String id,
+            String title,
+            int iconResId,
+            boolean isIncome,
+            Date createdDate,
+            Date updatedDate
+    ) {
         this.id = id;
         this.title = title;
         this.iconResId = iconResId;
@@ -48,7 +59,7 @@ public class CategoryEntity {
         this.updatedDate = updatedDate;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 

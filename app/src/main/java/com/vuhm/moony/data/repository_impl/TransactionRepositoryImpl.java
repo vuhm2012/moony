@@ -6,7 +6,6 @@ import com.vuhm.moony.domain.model.Transaction;
 import com.vuhm.moony.domain.repository.TransactionRepository;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -40,7 +39,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     }
 
     @Override
-    public Completable deleteTransactionById(UUID transactionId) {
+    public Completable deleteTransactionById(String transactionId) {
         return transactionDao.deleteTransactionById(transactionId);
     }
 

@@ -5,21 +5,25 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Category {
-    private final UUID id;
+    private final String id;
     private String title;
     private int iconResId;
     private boolean isIncome;
     private final Date createdDate;
-    private Date updatedDate;
+    private final Date updatedDate;
 
     public Category() {
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString();
         this.createdDate = Calendar.getInstance().getTime();
         this.updatedDate = Calendar.getInstance().getTime();
     }
 
-    public Category(String title, int iconResId, boolean isIncome) {
-        this.id = UUID.randomUUID();
+    public Category(
+            String title,
+            int iconResId,
+            boolean isIncome
+    ) {
+        this.id = UUID.randomUUID().toString();
         this.title = title;
         this.iconResId = iconResId;
         this.isIncome = isIncome;
@@ -27,7 +31,14 @@ public class Category {
         this.updatedDate = Calendar.getInstance().getTime();
     }
 
-    public Category(UUID id, String title, int iconResId, boolean isIncome, Date createdDate, Date updatedDate) {
+    public Category(
+            String id,
+            String title,
+            int iconResId,
+            boolean isIncome,
+            Date createdDate,
+            Date updatedDate
+    ) {
         this.id = id;
         this.title = title;
         this.iconResId = iconResId;
@@ -36,7 +47,7 @@ public class Category {
         this.updatedDate = updatedDate;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
@@ -60,10 +71,13 @@ public class Category {
         return updatedDate;
     }
 
-    public void updateCategory(String title, int iconResId, boolean isIncome) {
+    public void updateCategory(
+            String title,
+            int iconResId,
+            boolean isIncome
+    ) {
         this.title = title;
         this.iconResId = iconResId;
         this.isIncome = isIncome;
-        this.updatedDate = Calendar.getInstance().getTime();
     }
 }

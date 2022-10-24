@@ -16,7 +16,9 @@ public class TransactionMapper implements IMapper<TransactionEntity, Transaction
                 transaction.getId(),
                 transaction.getTitle(),
                 transaction.getAmount(),
+                transaction.getDescription(),
                 transaction.getCategoryId(),
+                transaction.getSavingId(),
                 transaction.getCreatedDate(),
                 transaction.getUpdatedDate()
         );
@@ -28,13 +30,17 @@ public class TransactionMapper implements IMapper<TransactionEntity, Transaction
                 transaction.getId(),
                 transaction.getTitle(),
                 transaction.getAmount(),
+                transaction.getDescription(),
                 transaction.getCategoryId(),
+                transaction.getSavingId(),
                 transaction.getCreatedDate(),
                 transaction.getUpdatedDate()
         );
     }
 
-    public Observable<List<TransactionEntity>> mapToEntityList(Observable<List<Transaction>> transactions) {
+    public Observable<List<TransactionEntity>> mapToEntityList(
+            Observable<List<Transaction>> transactions
+    ) {
         return transactions.map(models -> {
             List<TransactionEntity> list = new ArrayList<>();
             for (int i = 0; i < models.size(); i++) {
@@ -44,7 +50,9 @@ public class TransactionMapper implements IMapper<TransactionEntity, Transaction
         });
     }
 
-    public Observable<List<Transaction>> mapFromEntityList(Observable<List<TransactionEntity>> transactionEntities) {
+    public Observable<List<Transaction>> mapFromEntityList(
+            Observable<List<TransactionEntity>> transactionEntities
+    ) {
         return transactionEntities.map(entities -> {
             List<Transaction> list = new ArrayList<>();
             for (int i = 0; i < entities.size(); i++) {

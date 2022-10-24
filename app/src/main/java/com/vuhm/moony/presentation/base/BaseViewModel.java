@@ -9,8 +9,11 @@ import io.reactivex.Observable;
 
 public abstract class BaseViewModel extends ViewModel {
 
-    protected <T> LiveData<T> fromObservableToLiveData(Observable<T> observable) {
-        return LiveDataReactiveStreams.fromPublisher(observable.toFlowable(BackpressureStrategy.LATEST));
+    protected <T> LiveData<T> fromObservableToLiveData(
+            Observable<T> observable
+    ) {
+        return LiveDataReactiveStreams
+                .fromPublisher(observable.toFlowable(BackpressureStrategy.LATEST));
     }
 
 }

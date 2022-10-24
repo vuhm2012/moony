@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase;
 
 import com.vuhm.moony.data.local.CategoryDao;
 import com.vuhm.moony.data.local.MoonyDatabase;
+import com.vuhm.moony.data.local.SavingDao;
 import com.vuhm.moony.data.local.TransactionDao;
 
 import javax.inject.Singleton;
@@ -44,5 +45,11 @@ public class DataSourceModule {
     @Singleton
     public CategoryDao provideCategoryDao(MoonyDatabase database) {
         return database.getCategoryDao();
+    }
+
+    @Provides
+    @Singleton
+    public SavingDao provideSavingDao(MoonyDatabase database) {
+        return database.getSavingDao();
     }
 }

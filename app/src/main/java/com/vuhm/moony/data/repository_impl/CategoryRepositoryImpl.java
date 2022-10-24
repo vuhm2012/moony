@@ -6,7 +6,6 @@ import com.vuhm.moony.domain.model.Category;
 import com.vuhm.moony.domain.repository.CategoryRepository;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -40,7 +39,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
-    public Completable deleteCategoryById(UUID categoryId) {
+    public Completable deleteCategoryById(String categoryId) {
         return categoryDao.deleteCategoryById(categoryId);
     }
 

@@ -1,12 +1,16 @@
 package com.vuhm.moony.di;
 
 import com.vuhm.moony.data.local.CategoryDao;
+import com.vuhm.moony.data.local.SavingDao;
 import com.vuhm.moony.data.local.TransactionDao;
 import com.vuhm.moony.data.mapper.CategoryMapper;
+import com.vuhm.moony.data.mapper.SavingMapper;
 import com.vuhm.moony.data.mapper.TransactionMapper;
 import com.vuhm.moony.data.repository_impl.CategoryRepositoryImpl;
+import com.vuhm.moony.data.repository_impl.SavingRepositoryImpl;
 import com.vuhm.moony.data.repository_impl.TransactionRepositoryImpl;
 import com.vuhm.moony.domain.repository.CategoryRepository;
+import com.vuhm.moony.domain.repository.SavingRepository;
 import com.vuhm.moony.domain.repository.TransactionRepository;
 
 import javax.inject.Singleton;
@@ -31,6 +35,12 @@ public class RepositoryModule {
     @Provides
     CategoryRepository provideCategoryRepository(CategoryDao categoryDao, CategoryMapper categoryMapper) {
         return new CategoryRepositoryImpl(categoryDao, categoryMapper);
+    }
+
+    @Singleton
+    @Provides
+    SavingRepository provideSavingRepository(SavingDao savingDao, SavingMapper savingMapper) {
+        return new SavingRepositoryImpl(savingDao, savingMapper);
     }
 
 }
