@@ -12,23 +12,14 @@
         android:layout_height="match_parent"
         android:background="@color/bg_color">
 
-        <View
-            android:id="@+id/top"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="-50dp"
-            android:background="@drawable/bg_blue_round_bottom_corner"
-            app:layout_constraintBottom_toBottomOf="@+id/lb_title" />
-
         <TextView
             android:id="@+id/lb_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/titles_font"
             android:paddingVertical="16dp"
             android:text="@string/transaction"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent" />
@@ -50,10 +41,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="16dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="3dp"
-            app:layout_constraintBottom_toBottomOf="@id/top"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lb_title">
@@ -188,6 +178,7 @@
             android:id="@+id/rcv_transactions"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_totals"
             tools:itemCount="10"
