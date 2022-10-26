@@ -8,4 +8,10 @@
 
     <string name="next">Next</string>
     <string name="prev">Prew</string>
+
+    <string name="invite_friends">Invite Friends</string>
+    <string name="give_feedback">Give us feedback</string>
+    <string name="rate_us">Rate us</string>
+    <string name="about">About</string>
+    <string name="for_developer">For developer</string>
 </resources>
