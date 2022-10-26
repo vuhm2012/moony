@@ -14,7 +14,6 @@
             android:id="@+id/txt_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/titles_font"
             android:text="@string/category"
             android:textAlignment="center"
             android:textSize="30sp"

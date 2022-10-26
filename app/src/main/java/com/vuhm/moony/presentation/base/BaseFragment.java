@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.Navigation;
 
 public abstract class BaseFragment extends Fragment {
 
@@ -39,5 +40,13 @@ public abstract class BaseFragment extends Fragment {
 
     public ViewDataBinding getBinding() {
         return binding;
+    }
+
+    public View getActivityViewById(int viewId) {
+        return fragmentActivity.findViewById(viewId);
+    }
+
+    public void navigate(View view, int resId) {
+        Navigation.findNavController(view).navigate(resId);
     }
 }

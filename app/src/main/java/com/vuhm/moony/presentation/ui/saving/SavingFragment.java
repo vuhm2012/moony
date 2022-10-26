@@ -1,6 +1,7 @@
 package com.vuhm.moony.presentation.ui.saving;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +24,14 @@ public class SavingFragment extends BaseFragment {
     @Override
     public int getLayoutId() {
         return R.layout.fragment_saving;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivityViewById(R.id.bottom_bar).getVisibility() == View.GONE) {
+            getActivityViewById(R.id.bottom_bar).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -49,6 +58,9 @@ public class SavingFragment extends BaseFragment {
 
     @Override
     public void initEvents() {
-
+        binding.btnAddSaving.setOnClickListener(view -> {
+            getActivityViewById(R.id.bottom_bar).setVisibility(View.GONE);
+            navigate(view, R.id.action_savingFragment_to_savingDetailFragment);
+        });
     }
 }
