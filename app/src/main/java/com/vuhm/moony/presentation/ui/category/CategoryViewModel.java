@@ -1,7 +1,6 @@
 package com.vuhm.moony.presentation.ui.category;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.vuhm.moony.domain.model.Category;
 import com.vuhm.moony.domain.repository.CategoryRepository;
@@ -22,9 +21,6 @@ public class CategoryViewModel extends BaseViewModel {
     public CategoryViewModel(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
-
-    private MutableLiveData<List<Category>> _categories = new MutableLiveData();
-    public LiveData<List<Category>> categories = _categories;
 
     public LiveData<List<Category>> getAllCategories() {
         return fromObservableToLiveData(categoryRepository.getAllCategories());
