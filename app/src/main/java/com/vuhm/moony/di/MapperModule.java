@@ -2,6 +2,7 @@ package com.vuhm.moony.di;
 
 import com.vuhm.moony.data.mapper.CategoryMapper;
 import com.vuhm.moony.data.mapper.SavingMapper;
+import com.vuhm.moony.data.mapper.TransactionItemMapper;
 import com.vuhm.moony.data.mapper.TransactionMapper;
 
 import javax.inject.Singleton;
@@ -31,6 +32,20 @@ public class MapperModule {
     @Provides
     SavingMapper provideSavingMapper() {
         return new SavingMapper();
+    }
+
+    @Singleton
+    @Provides
+    TransactionItemMapper provideTransactionItemMapper(
+            TransactionMapper transactionMapper,
+            CategoryMapper categoryMapper,
+            SavingMapper savingMapper
+    ) {
+        return new TransactionItemMapper(
+                transactionMapper,
+                categoryMapper,
+                savingMapper
+        );
     }
 
 }

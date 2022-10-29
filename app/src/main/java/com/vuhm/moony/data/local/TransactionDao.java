@@ -7,6 +7,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.vuhm.moony.data.entity.TransactionEntity;
+import com.vuhm.moony.data.entity.TransactionItemEntity;
 
 import java.util.List;
 
@@ -31,5 +32,9 @@ public interface TransactionDao {
     @Query("SELECT * FROM `transaction`")
     Observable<List<TransactionEntity>> getAllTransactions();
 
-
+    @Query("SELECT * FROM `transaction` " +
+            "INNER JOIN `category` ON category_id = `category`.id " +
+            "INNER JOIN `saving` ON saving_id = `saving`.id " +
+            "WHERE category_id = :categoryId AND saving_id = :savingId")
+    Observable<List<TransactionItemEntity>> getAllTransactions(String categoryId, String savingId);
 }

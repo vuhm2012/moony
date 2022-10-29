@@ -1,6 +1,7 @@
 package com.vuhm.moony.domain.repository;
 
 import com.vuhm.moony.domain.model.Transaction;
+import com.vuhm.moony.domain.model.TransactionItem;
 
 import java.util.List;
 
@@ -18,5 +19,7 @@ public interface TransactionRepository {
     Completable deleteTransactionById(String transactionId);
 
     Observable<List<Transaction>> getAllTransactions();
+
+    Observable<List<TransactionItem>> getAllTransaction(String categoryId, String savingId);
 
 }

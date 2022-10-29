@@ -1,8 +1,10 @@
 package com.vuhm.moony.data.repository_impl;
 
 import com.vuhm.moony.data.local.TransactionDao;
+import com.vuhm.moony.data.mapper.TransactionItemMapper;
 import com.vuhm.moony.data.mapper.TransactionMapper;
 import com.vuhm.moony.domain.model.Transaction;
+import com.vuhm.moony.domain.model.TransactionItem;
 import com.vuhm.moony.domain.repository.TransactionRepository;
 
 import java.util.List;
@@ -16,11 +18,17 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 
     private final TransactionDao transactionDao;
     private final TransactionMapper transactionMapper;
+    private final TransactionItemMapper transactionItemMapper;
 
     @Inject
-    public TransactionRepositoryImpl(TransactionDao transactionDao, TransactionMapper transactionMapper) {
+    public TransactionRepositoryImpl(
+            TransactionDao transactionDao,
+            TransactionMapper transactionMapper,
+            TransactionItemMapper transactionItemMapper
+    ) {
         this.transactionDao = transactionDao;
         this.transactionMapper = transactionMapper;
+        this.transactionItemMapper = transactionItemMapper;
     }
 
     @Override
@@ -46,5 +54,14 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     @Override
     public Observable<List<Transaction>> getAllTransactions() {
         return transactionMapper.mapFromEntityList(transactionDao.getAllTransactions());
+    }
+
+    @Override
+    public Observable<List<TransactionItem>> getAllTransaction(
+            String categoryId,
+            String savingId
+    ) {
+        return transactionItemMapper
+                .mapFromEntityList(transactionDao.getAllTransactions(categoryId, savingId));
     }
 }
