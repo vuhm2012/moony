@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public class CategoryRepositoryImpl implements CategoryRepository {
 
@@ -46,5 +47,10 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     @Override
     public Observable<List<Category>> getAllCategories() {
         return categoryMapper.mapFromEntityList(categoryDao.getAllCategories());
+    }
+
+    @Override
+    public Single<Integer> countTransactionByCategoryId(String categoryId) {
+        return categoryDao.countTransactionByCategoryId(categoryId);
     }
 }

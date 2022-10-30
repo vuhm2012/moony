@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.vuhm.moony.presentation.ui.category.CategoryFragment"
-        android:label="HistoryFragment" />
+        android:label="HistoryFragment">
+        <action
+            android:id="@+id/action_categoryFragment_to_categoryDetailFragment"
+            app:destination="@id/categoryDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/savingFragment"
         android:name="com.vuhm.moony.presentation.ui.saving.SavingFragment"
@@ -36,4 +40,8 @@
         android:id="@+id/savingDetailFragment"
         android:name="com.vuhm.moony.presentation.ui.saving_detail.SavingDetailFragment"
         android:label="SavingDetailFragment" />
+    <fragment
+        android:id="@+id/categoryDetailFragment"
+        android:name="com.vuhm.moony.presentation.ui.category_detail.CategoryDetailFragment"
+        android:label="CategoryDetailFragment" />
 </navigation>

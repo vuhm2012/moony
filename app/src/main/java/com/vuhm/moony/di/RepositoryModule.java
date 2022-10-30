@@ -7,6 +7,7 @@ import com.vuhm.moony.data.local.SavingDao;
 import com.vuhm.moony.data.local.TransactionDao;
 import com.vuhm.moony.data.mapper.CategoryMapper;
 import com.vuhm.moony.data.mapper.SavingMapper;
+import com.vuhm.moony.data.mapper.TransactionItemMapper;
 import com.vuhm.moony.data.mapper.TransactionMapper;
 import com.vuhm.moony.data.repository_impl.AppSettingRepositoryImpl;
 import com.vuhm.moony.data.repository_impl.CategoryRepositoryImpl;
@@ -32,8 +33,12 @@ public class RepositoryModule {
 
     @Singleton
     @Provides
-    TransactionRepository provideTransactionRepository(TransactionDao transactionDao, TransactionMapper transactionMapper) {
-        return new TransactionRepositoryImpl(transactionDao, transactionMapper);
+    TransactionRepository provideTransactionRepository(
+            TransactionDao transactionDao,
+            TransactionMapper transactionMapper,
+            TransactionItemMapper transactionItemMapper
+    ) {
+        return new TransactionRepositoryImpl(transactionDao, transactionMapper, transactionItemMapper);
     }
 
     @Singleton

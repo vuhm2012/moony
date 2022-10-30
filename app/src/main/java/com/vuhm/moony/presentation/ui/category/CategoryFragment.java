@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class CategoryFragment extends BaseFragment {
 
-    private FragmentCategoryBinding bidning;
+    private FragmentCategoryBinding binding;
     private CategoryAdapter adapter;
     private List<CategoryIcon> icons = new ArrayList();
 
@@ -82,16 +82,18 @@ public class CategoryFragment extends BaseFragment {
         list.add("Mua oppo");
         list.add("Mua samsung");
         list.add("Mua realme");
-        bidning = (FragmentCategoryBinding) getBinding();
+        binding = (FragmentCategoryBinding) getBinding();
         adapter = new CategoryAdapter(list, data -> {
             Toast.makeText(baseContext, "Data: " + data, Toast.LENGTH_SHORT).show();
         });
-        bidning.rcvCategory.setLayoutManager(new LinearLayoutManager(baseContext));
-        bidning.rcvCategory.setAdapter(adapter);
+        binding.rcvCategory.setLayoutManager(new LinearLayoutManager(baseContext));
+        binding.rcvCategory.setAdapter(adapter);
     }
 
     @Override
     public void initEvents() {
-
+        binding.btnAddCategory.setOnClickListener(view -> {
+            navigate(view, R.id.action_categoryFragment_to_categoryDetailFragment);
+        });
     }
 }

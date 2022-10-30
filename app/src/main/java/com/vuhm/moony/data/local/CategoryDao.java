@@ -12,6 +12,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 @Dao
 public interface CategoryDao {
@@ -30,5 +31,8 @@ public interface CategoryDao {
 
     @Query("SELECT * FROM `category`")
     Observable<List<CategoryEntity>> getAllCategories();
+
+    @Query("SELECT COUNT(id) FROM `transaction` WHERE category_id = :categoryId")
+    Single<Integer> countTransactionByCategoryId(String categoryId);
 
 }
