@@ -3,12 +3,12 @@ package com.vuhm.moony.presentation.ui.category_detail;
 import android.os.Bundle;
 
 import com.vuhm.moony.R;
-import com.vuhm.moony.databinding.FragmentSavingDetailBinding;
+import com.vuhm.moony.databinding.FragmentCategoryDetailBinding;
 import com.vuhm.moony.presentation.base.BaseFragment;
 
 public class CategoryDetailFragment extends BaseFragment {
 
-    private FragmentSavingDetailBinding binding;
+    private FragmentCategoryDetailBinding binding;
 
     @Override
     public int getLayoutId() {
@@ -17,11 +17,11 @@ public class CategoryDetailFragment extends BaseFragment {
 
     @Override
     public void initControls(Bundle savedInstanceState) {
-
+        binding = (FragmentCategoryDetailBinding) getBinding();
     }
 
     @Override
     public void initEvents() {
-
+        binding.btnBack.setOnClickListener(this::pop);
     }
 }

@@ -49,4 +49,8 @@ public abstract class BaseFragment extends Fragment {
     public void navigate(View view, int resId) {
         Navigation.findNavController(view).navigate(resId);
     }
+
+    public void pop(View view) {
+        Navigation.findNavController(view).popBackStack();
+    }
 }

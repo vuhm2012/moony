@@ -93,6 +93,7 @@ public class CategoryFragment extends BaseFragment {
     @Override
     public void initEvents() {
         binding.btnAddCategory.setOnClickListener(view -> {
+            getActivityViewById(R.id.bottom_bar).setVisibility(View.GONE);
             navigate(view, R.id.action_categoryFragment_to_categoryDetailFragment);
         });
     }
