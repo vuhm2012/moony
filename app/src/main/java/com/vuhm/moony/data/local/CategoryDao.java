@@ -3,6 +3,7 @@ package com.vuhm.moony.data.local;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -17,7 +18,7 @@ import io.reactivex.Single;
 @Dao
 public interface CategoryDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     Completable createCategory(CategoryEntity category);
 
     @Update

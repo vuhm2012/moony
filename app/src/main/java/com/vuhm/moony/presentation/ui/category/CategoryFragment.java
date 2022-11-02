@@ -1,9 +1,11 @@
 package com.vuhm.moony.presentation.ui.category;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.vuhm.moony.R;
@@ -22,6 +24,7 @@ public class CategoryFragment extends BaseFragment {
     private FragmentCategoryBinding binding;
     private CategoryAdapter adapter;
     private List<CategoryIcon> icons = new ArrayList();
+    private CategoryViewModel viewModel;
 
     @Override
     public int getLayoutId() {
@@ -38,6 +41,7 @@ public class CategoryFragment extends BaseFragment {
 
     @Override
     public void initControls(Bundle savedInstanceState) {
+        viewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         icons.add(new CategoryIcon("Birthday", R.drawable.ic_birthday));
         icons.add(new CategoryIcon("Bus", R.drawable.ic_bus));
         icons.add(new CategoryIcon("Celebration", R.drawable.ic_celebration));
@@ -88,6 +92,12 @@ public class CategoryFragment extends BaseFragment {
         });
         binding.rcvCategory.setLayoutManager(new LinearLayoutManager(baseContext));
         binding.rcvCategory.setAdapter(adapter);
+        viewModel.getAllCategory();
+        viewModel.categories.observe(getViewLifecycleOwner(), categories -> {
+            for (int i = 0; i < categories.size(); i++) {
+                Log.d("HIHI", categories.get(i).toString());
+            }
+        });
     }
 
     @Override

@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel;
 
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 
 public abstract class BaseViewModel extends ViewModel {
+
+    protected Disposable disposable;
 
     protected <T> LiveData<T> fromObservableToLiveData(
             Observable<T> observable

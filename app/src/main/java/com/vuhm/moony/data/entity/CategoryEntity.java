@@ -1,18 +1,22 @@
 package com.vuhm.moony.data.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity(tableName = "category")
+@TypeConverters(DateConverter.class)
 public class CategoryEntity {
+    @NonNull
     @PrimaryKey
     @ColumnInfo(name = "id")
-    private final String id;
+    private String id;
     @ColumnInfo(name = "title")
     private String title;
     @ColumnInfo(name = "icon_res_id")
@@ -20,8 +24,10 @@ public class CategoryEntity {
     @ColumnInfo(name = "is_income")
     private boolean isIncome;
     @ColumnInfo(name = "created_date")
-    private final Date createdDate;
+    @TypeConverters(DateConverter.class)
+    private Date createdDate;
     @ColumnInfo(name = "updated_date")
+    @TypeConverters(DateConverter.class)
     private Date updatedDate;
 
     public CategoryEntity() {
@@ -63,23 +69,47 @@ public class CategoryEntity {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getIconResId() {
         return iconResId;
     }
 
+    public void setIconResId(int iconResId) {
+        this.iconResId = iconResId;
+    }
+
     public boolean isIncome() {
         return isIncome;
+    }
+
+    public void setIncome(boolean income) {
+        isIncome = income;
     }
 
     public Date getCreatedDate() {
         return createdDate;
     }
 
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
     public Date getUpdatedDate() {
         return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 }
