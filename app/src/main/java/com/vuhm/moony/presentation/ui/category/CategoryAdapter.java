@@ -1,8 +1,10 @@
 package com.vuhm.moony.presentation.ui.category;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,28 +13,41 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vuhm.moony.R;
 import com.vuhm.moony.core.utils.OnItemClick;
+import com.vuhm.moony.domain.model.Category;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
-    private final List<String> categories;
-    private final OnItemClick<String> listener;
+    private final Context context;
+    private final List<Category> categories;
+    private final OnItemClick<Category> listener;
+//    private final int countTransaction;
 
-    public CategoryAdapter(List<String> categories, OnItemClick listener) {
+    public CategoryAdapter(
+            Context context,
+            List<Category> categories,
+            OnItemClick listener
+//            int countTransaction
+    ) {
+        this.context = context;
         this.categories = categories;
         this.listener = listener;
+//        this.countTransaction = countTransaction;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView lbCategoryTitle;
+        private final TextView lbCategoryTitle, lbNumOfTransaction;
         private final CardView cardCategory;
+        private final ImageView imgIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             lbCategoryTitle = itemView.findViewById(R.id.lb_category_title);
             cardCategory = itemView.findViewById(R.id.card_category);
+            imgIcon = itemView.findViewById(R.id.img_category);
+            lbNumOfTransaction = itemView.findViewById(R.id.lb_num_of_transactions);
         }
 
         public TextView getLbCategoryTitle() {
@@ -41,6 +56,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         public CardView getCardCategory() {
             return cardCategory;
+        }
+
+        public ImageView getImageView() {
+            return imgIcon;
+        }
+
+        public TextView getLbNumOfTransaction() {
+            return lbNumOfTransaction;
         }
     }
 
@@ -53,9 +76,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String item = categories.get(position);
-        holder.getLbCategoryTitle().setText(item);
+        Category item = categories.get(position);
+        if (categories.get(position).isIncome()) {
+            holder.getLbCategoryTitle().setTextColor(context.getResources().getColor(R.color.color_green));
+            holder.getImageView().setColorFilter(context.getResources().getColor(R.color.color_green));
+        } else {
+            holder.getLbCategoryTitle().setTextColor(context.getResources().getColor(R.color.color_red));
+            holder.getImageView().setColorFilter(context.getResources().getColor(R.color.color_red));
+        }
+        holder.getLbCategoryTitle().setText(item.getTitle());
         holder.getCardCategory().setOnClickListener(view -> listener.onClick(item));
+        holder.getImageView().setImageResource(item.getIconResId());
+//        holder.getLbNumOfTransaction().setText(countTransaction);
     }
 
     @Override

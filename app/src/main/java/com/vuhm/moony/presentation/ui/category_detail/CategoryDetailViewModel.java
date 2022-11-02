@@ -7,6 +7,7 @@ import com.vuhm.moony.presentation.base.BaseViewModel;
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import io.reactivex.schedulers.Schedulers;
 
 @HiltViewModel
 public class CategoryDetailViewModel extends BaseViewModel {
@@ -19,10 +20,14 @@ public class CategoryDetailViewModel extends BaseViewModel {
     }
 
     public void createCategory(Category category) {
-        categoryRepository.createCategory(category);
+        categoryRepository.createCategory(category).subscribeOn(Schedulers.io()).subscribe();
     }
 
     public void updateCategory(Category category) {
-        categoryRepository.updateCategory(category);
+        categoryRepository.updateCategory(category).subscribeOn(Schedulers.io()).subscribe();
+    }
+
+    public void deleteCategory(String id) {
+        categoryRepository.deleteCategoryById(id).subscribeOn(Schedulers.io()).subscribe();
     }
 }

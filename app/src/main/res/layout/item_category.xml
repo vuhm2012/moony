@@ -44,7 +44,7 @@
             app:layout_constraintLeft_toLeftOf="@id/lb_category_title" />
 
         <TextView
-            android:id="@+id/lb_saving_goal"
+            android:id="@+id/lb_num_of_transactions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="20"
