@@ -20,6 +20,8 @@ public interface TransactionRepository {
 
     Observable<List<Transaction>> getAllTransactions();
 
-    Observable<List<TransactionItem>> getAllTransaction(String categoryId, String savingId);
+    Observable<List<TransactionItem>> getAllTransaction();
+
+    Observable<List<TransactionItem>> getTransactionById(String id);
 
 }

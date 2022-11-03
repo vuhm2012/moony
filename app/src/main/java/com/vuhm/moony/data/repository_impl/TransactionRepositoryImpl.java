@@ -57,11 +57,14 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     }
 
     @Override
-    public Observable<List<TransactionItem>> getAllTransaction(
-            String categoryId,
-            String savingId
-    ) {
+    public Observable<List<TransactionItem>> getAllTransaction() {
         return transactionItemMapper
-                .mapFromEntityList(transactionDao.getAllTransactions(categoryId, savingId));
+                .mapFromEntityList(transactionDao.getAllTransaction());
+    }
+
+    @Override
+    public Observable<List<TransactionItem>> getTransactionById(String id) {
+        return transactionItemMapper
+                .mapFromEntityList(transactionDao.getTransactionById(id));
     }
 }

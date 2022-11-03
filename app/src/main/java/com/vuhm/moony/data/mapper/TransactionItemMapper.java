@@ -30,11 +30,20 @@ public class TransactionItemMapper implements IMapper<TransactionItemEntity, Tra
 
     @Override
     public TransactionItem mapFromEntity(TransactionItemEntity transactionItemEntity) {
-        return new TransactionItem(
-                transactionMapper.mapFromEntity(transactionItemEntity.getTransaction()),
-                categoryMapper.mapFromEntity(transactionItemEntity.getCategory()),
-                savingMapper.mapFromEntity(transactionItemEntity.getSaving())
-        );
+        if (transactionItemEntity.getSaving() == null) {
+            return new TransactionItem(
+                    transactionMapper.mapFromEntity(transactionItemEntity.getTransaction()),
+                    categoryMapper.mapFromEntity(transactionItemEntity.getCategory()),
+                    null
+            );
+        } else {
+            return new TransactionItem(
+                    transactionMapper.mapFromEntity(transactionItemEntity.getTransaction()),
+                    categoryMapper.mapFromEntity(transactionItemEntity.getCategory()),
+                    savingMapper.mapFromEntity(transactionItemEntity.getSaving())
+            );
+        }
+
     }
 
     @Override

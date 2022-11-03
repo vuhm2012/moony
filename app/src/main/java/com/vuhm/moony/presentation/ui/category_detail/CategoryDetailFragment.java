@@ -24,7 +24,7 @@ public class CategoryDetailFragment extends BaseFragment {
 
     private FragmentCategoryDetailBinding binding;
     private CategoryDetailViewModel viewModel;
-    private int iconResId;
+    private int iconResId = -1;
 
     @Override
     public int getLayoutId() {
@@ -33,7 +33,6 @@ public class CategoryDetailFragment extends BaseFragment {
 
     @Override
     public void initControls(Bundle savedInstanceState) {
-        iconResId = -1;
         viewModel = new ViewModelProvider(this).get(CategoryDetailViewModel.class);
         binding = (FragmentCategoryDetailBinding) getBinding();
         binding.rdbIncome.setChecked(true);

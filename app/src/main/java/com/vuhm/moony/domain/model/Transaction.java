@@ -24,15 +24,13 @@ public class Transaction {
     public Transaction(
             String title,
             double amount,
-            String categoryId,
-            String savingId
-    ) {
+            String description,
+            String categoryId) {
         this.id = UUID.randomUUID().toString();
         this.title = title;
         this.amount = amount;
-        this.description = "";
+        this.description = description;
         this.categoryId = categoryId;
-        this.savingId = savingId;
         this.createdDate = Calendar.getInstance().getTime();
         this.updatedDate = Calendar.getInstance().getTime();
     }

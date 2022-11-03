@@ -11,23 +11,26 @@ import java.util.List;
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import io.reactivex.schedulers.Schedulers;
 
 @HiltViewModel
 public class CategoryViewModel extends BaseViewModel {
 
     private final CategoryRepository categoryRepository;
+    public int countTransaction;
 
     @Inject
     public CategoryViewModel(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
+        countTransaction = 0;
     }
 
     public LiveData<List<Category>> getAllCategories() {
         return fromObservableToLiveData(categoryRepository.getAllCategories());
     }
 
-    public LiveData<Integer> countTransactionByCategoryId(String id) {
-        return fromSingleToLiveData(categoryRepository.countTransactionByCategoryId(id));
+    public void countTransactionByCategoryId(String id) {
+        categoryRepository.countTransactionByCategoryId(id).observeOn(Schedulers.io()).subscribe();
     }
 
     @Override

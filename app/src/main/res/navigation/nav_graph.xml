@@ -30,7 +30,12 @@
         android:label="TransactionFragment">
         <action
             android:id="@+id/action_transactionFragment_to_transactionDetailFragment"
-            app:destination="@id/transactionDetailFragment" />
+            app:destination="@id/transactionDetailFragment">
+            <argument
+                android:name="transactionId"
+                android:defaultValue="-1"
+                app:argType="string" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/transactionDetailFragment"
