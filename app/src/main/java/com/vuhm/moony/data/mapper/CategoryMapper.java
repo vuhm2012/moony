@@ -15,7 +15,7 @@ public class CategoryMapper implements IMapper<CategoryEntity, Category> {
     @Override
     public Category mapFromEntity(CategoryEntity category) {
         return new Category(
-                category.getId(),
+                category.getCategoryId(),
                 category.getTitle(),
                 category.getIconResId(),
                 category.isIncome(),
@@ -27,7 +27,7 @@ public class CategoryMapper implements IMapper<CategoryEntity, Category> {
     @Override
     public CategoryEntity mapToEntity(Category category) {
         return new CategoryEntity(
-                category.getId(),
+                category.getCategoryId(),
                 category.getTitle(),
                 category.getIconResId(),
                 category.isIncome(),

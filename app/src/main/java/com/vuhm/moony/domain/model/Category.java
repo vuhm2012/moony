@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Category {
-    private final String id;
+    private final String categoryId;
     private String title;
     private int iconResId;
     private boolean isIncome;
@@ -13,7 +13,7 @@ public class Category {
     private final Date updatedDate;
 
     public Category() {
-        this.id = UUID.randomUUID().toString();
+        this.categoryId = UUID.randomUUID().toString();
         this.createdDate = Calendar.getInstance().getTime();
         this.updatedDate = Calendar.getInstance().getTime();
     }
@@ -23,7 +23,7 @@ public class Category {
             int iconResId,
             boolean isIncome
     ) {
-        this.id = UUID.randomUUID().toString();
+        this.categoryId = UUID.randomUUID().toString();
         this.title = title;
         this.iconResId = iconResId;
         this.isIncome = isIncome;
@@ -32,14 +32,14 @@ public class Category {
     }
 
     public Category(
-            String id,
+            String categoryId,
             String title,
             int iconResId,
             boolean isIncome,
             Date createdDate,
             Date updatedDate
     ) {
-        this.id = id;
+        this.categoryId = categoryId;
         this.title = title;
         this.iconResId = iconResId;
         this.isIncome = isIncome;
@@ -47,8 +47,8 @@ public class Category {
         this.updatedDate = updatedDate;
     }
 
-    public String getId() {
-        return id;
+    public String getCategoryId() {
+        return categoryId;
     }
 
     public String getTitle() {

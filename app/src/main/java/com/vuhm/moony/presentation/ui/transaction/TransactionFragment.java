@@ -1,6 +1,7 @@
 package com.vuhm.moony.presentation.ui.transaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -55,10 +56,16 @@ public class TransactionFragment extends BaseFragment {
             binding.lbIncomeValue.setText(String.valueOf(totalIncomes));
             binding.lbExpenseValue.setText(String.valueOf(totalExpenses));
             adapter = new TransactionAdapter(requireContext(), transactionItem, data -> {
+                for (int i = 0; i < transactionItem.size(); i++) {
+                    Log.d("HIHI", "Txn: " + transactionItem.get(i).getTransaction().getTransactionId());
+                    Log.d("HIHI", "Cat: " + transactionItem.get(i).getCategory().getCategoryId());
+                }
+
                 TransactionItem item = (TransactionItem) data;
                 TransactionFragmentDirections.ActionTransactionFragmentToTransactionDetailFragment action =
                         TransactionFragmentDirections.actionTransactionFragmentToTransactionDetailFragment();
-                action.setTransactionId(item.getTransaction().getId());
+                Log.d("HIHI", "Param: " + item.getTransaction().getTransactionId());
+                action.setTransactionId(item.getTransaction().getTransactionId());
                 Navigation.findNavController(this.getView()).navigate(action);
             });
             binding.rcvTransactions.setAdapter(adapter);

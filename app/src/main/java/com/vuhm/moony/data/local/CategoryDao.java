@@ -27,13 +27,13 @@ public interface CategoryDao {
     @Delete
     Completable deleteCategory(CategoryEntity category);
 
-    @Query("DELETE FROM `category` WHERE id = :categoryId")
+    @Query("DELETE FROM `category` WHERE category_id = :categoryId")
     Completable deleteCategoryById(String categoryId);
 
     @Query("SELECT * FROM `category`")
     Observable<List<CategoryEntity>> getAllCategories();
 
-    @Query("SELECT COUNT(id) FROM `transaction` WHERE category_id = :categoryId")
+    @Query("SELECT COUNT(transaction_id) FROM `transaction` WHERE category_id = :categoryId")
     Single<Integer> countTransactionByCategoryId(String categoryId);
 
 }

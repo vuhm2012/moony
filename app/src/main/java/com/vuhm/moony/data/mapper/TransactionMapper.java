@@ -13,7 +13,7 @@ public class TransactionMapper implements IMapper<TransactionEntity, Transaction
     @Override
     public Transaction mapFromEntity(TransactionEntity transaction) {
         return new Transaction(
-                transaction.getId(),
+                transaction.getTransactionId(),
                 transaction.getTitle(),
                 transaction.getAmount(),
                 transaction.getDescription(),
@@ -27,7 +27,7 @@ public class TransactionMapper implements IMapper<TransactionEntity, Transaction
     @Override
     public TransactionEntity mapToEntity(Transaction transaction) {
         return new TransactionEntity(
-                transaction.getId(),
+                transaction.getTransactionId(),
                 transaction.getTitle(),
                 transaction.getAmount(),
                 transaction.getDescription(),

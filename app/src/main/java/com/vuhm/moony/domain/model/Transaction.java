@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Transaction {
-    private final String id;
+    private final String transactionId;
     private String title;
     private double amount;
     private String description;
@@ -15,7 +15,7 @@ public class Transaction {
     private final Date updatedDate;
 
     public Transaction() {
-        this.id = UUID.randomUUID().toString();
+        this.transactionId = UUID.randomUUID().toString();
         this.savingId = "-1";
         this.createdDate = Calendar.getInstance().getTime();
         this.updatedDate = Calendar.getInstance().getTime();
@@ -26,7 +26,7 @@ public class Transaction {
             double amount,
             String description,
             String categoryId) {
-        this.id = UUID.randomUUID().toString();
+        this.transactionId = UUID.randomUUID().toString();
         this.title = title;
         this.amount = amount;
         this.description = description;
@@ -42,7 +42,7 @@ public class Transaction {
             String categoryId,
             String savingId
     ) {
-        this.id = UUID.randomUUID().toString();
+        this.transactionId = UUID.randomUUID().toString();
         this.title = title;
         this.amount = amount;
         this.description = description;
@@ -53,7 +53,7 @@ public class Transaction {
     }
 
     public Transaction(
-            String id,
+            String transactionId,
             String title,
             double amount,
             String description,
@@ -62,7 +62,7 @@ public class Transaction {
             Date createdDate,
             Date updatedDate
     ) {
-        this.id = id;
+        this.transactionId = transactionId;
         this.title = title;
         this.amount = amount;
         this.description = description;
@@ -72,8 +72,8 @@ public class Transaction {
         this.updatedDate = updatedDate;
     }
 
-    public String getId() {
-        return id;
+    public String getTransactionId() {
+        return transactionId;
     }
 
     public String getTitle() {

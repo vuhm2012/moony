@@ -13,7 +13,7 @@ public class SavingMapper implements IMapper<SavingEntity, Saving> {
     @Override
     public Saving mapFromEntity(SavingEntity savingEntity) {
         return new Saving(
-                savingEntity.getId(),
+                savingEntity.getSavingId(),
                 savingEntity.getTitle(),
                 savingEntity.getDescription(),
                 savingEntity.getGoal(),

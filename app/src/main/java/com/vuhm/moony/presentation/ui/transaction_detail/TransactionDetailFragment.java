@@ -37,7 +37,7 @@ public class TransactionDetailFragment extends BaseFragment {
         transactionId = getArguments().getString("transactionId");
         binding = (FragmentTransactionDetailBinding) getBinding();
         if (!transactionId.equals("-1") && transactionId != null) {
-            viewModel.getTransactionById("1bf3124b-e194-4e5e-8a22-649df745ea47").observe(getViewLifecycleOwner(), transactionItems -> {
+            viewModel.getTransactionById(transactionId).observe(getViewLifecycleOwner(), transactionItems -> {
                 for (int i = 0; i < transactionItems.size(); i++) {
                     TransactionItem item = transactionItems.get(i);
                     binding.txtTitle.setText(item.getTransaction().getTitle());
@@ -59,7 +59,7 @@ public class TransactionDetailFragment extends BaseFragment {
             viewModel.getCategories().observe(getViewLifecycleOwner(), categories -> {
                 showDialogPickIcon(content -> {
                     binding.imgCategoryIcon.setImageResource(content.getIconResId());
-                    categoryId = content.getId();
+                    categoryId = content.getCategoryId();
                 }, categories);
             });
 

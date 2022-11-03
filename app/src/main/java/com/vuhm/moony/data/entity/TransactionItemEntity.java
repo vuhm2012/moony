@@ -8,12 +8,12 @@ public class TransactionItemEntity {
     private final TransactionEntity transaction;
     @Relation(
             parentColumn = "category_id",
-            entityColumn = "id"
+            entityColumn = "category_id"
     )
     private final CategoryEntity category;
     @Relation(
             parentColumn = "saving_id",
-            entityColumn = "id"
+            entityColumn = "saving_id"
     )
     private final SavingEntity saving;
 

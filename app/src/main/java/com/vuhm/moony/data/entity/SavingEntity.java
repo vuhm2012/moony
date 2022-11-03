@@ -15,8 +15,8 @@ import java.util.UUID;
 public class SavingEntity {
     @NonNull
     @PrimaryKey
-    @ColumnInfo(name = "id")
-    private String id;
+    @ColumnInfo(name = "saving_id")
+    private String savingId;
     @ColumnInfo(name = "title")
     private String title;
     @ColumnInfo(name = "description")
@@ -31,7 +31,7 @@ public class SavingEntity {
     private Date updatedAt;
 
     public SavingEntity() {
-        this.id = UUID.randomUUID().toString();
+        this.savingId = UUID.randomUUID().toString();
         this.createdAt = Calendar.getInstance().getTime();
         this.updatedAt = Calendar.getInstance().getTime();
     }
@@ -41,7 +41,7 @@ public class SavingEntity {
             String description,
             double goal
     ) {
-        this.id = UUID.randomUUID().toString();
+        this.savingId = UUID.randomUUID().toString();
         this.title = title;
         this.description = description;
         this.goal = goal;
@@ -50,14 +50,14 @@ public class SavingEntity {
     }
 
     public SavingEntity(
-            String id,
+            String savingId,
             String title,
             String description,
             double goal,
             Date createdAt,
             Date updatedAt
     ) {
-        this.id = id;
+        this.savingId = savingId;
         this.title = title;
         this.description = description;
         this.goal = goal;
@@ -66,12 +66,12 @@ public class SavingEntity {
     }
 
     @NonNull
-    public String getId() {
-        return id;
+    public String getSavingId() {
+        return savingId;
     }
 
-    public void setId(@NonNull String id) {
-        this.id = id;
+    public void setSavingId(@NonNull String savingId) {
+        this.savingId = savingId;
     }
 
     public String getTitle() {

@@ -24,7 +24,7 @@ public interface SavingDao {
     @Delete
     Completable deleteSaving(SavingEntity saving);
 
-    @Query("DELETE FROM `category` WHERE id = :savingId")
+    @Query("DELETE FROM `saving` WHERE saving_id = :savingId")
     Completable deleteSavingById(String savingId);
 
     @Query("SELECT * FROM `saving`")

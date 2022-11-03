@@ -15,8 +15,8 @@ import java.util.UUID;
 public class CategoryEntity {
     @NonNull
     @PrimaryKey
-    @ColumnInfo(name = "id")
-    private String id;
+    @ColumnInfo(name = "category_id")
+    private String categoryId;
     @ColumnInfo(name = "title")
     private String title;
     @ColumnInfo(name = "icon_res_id")
@@ -31,7 +31,7 @@ public class CategoryEntity {
     private Date updatedDate;
 
     public CategoryEntity() {
-        this.id = UUID.randomUUID().toString();
+        this.categoryId = UUID.randomUUID().toString();
         this.createdDate = Calendar.getInstance().getTime();
         this.updatedDate = Calendar.getInstance().getTime();
     }
@@ -41,7 +41,7 @@ public class CategoryEntity {
             int iconResId,
             boolean isIncome
     ) {
-        this.id = UUID.randomUUID().toString();
+        this.categoryId = UUID.randomUUID().toString();
         this.title = title;
         this.iconResId = iconResId;
         this.isIncome = isIncome;
@@ -50,14 +50,14 @@ public class CategoryEntity {
     }
 
     public CategoryEntity(
-            String id,
+            String catergoryId,
             String title,
             int iconResId,
             boolean isIncome,
             Date createdDate,
             Date updatedDate
     ) {
-        this.id = id;
+        this.categoryId = catergoryId;
         this.title = title;
         this.iconResId = iconResId;
         this.isIncome = isIncome;
@@ -65,12 +65,12 @@ public class CategoryEntity {
         this.updatedDate = updatedDate;
     }
 
-    public String getId() {
-        return id;
+    public String getCategoryId() {
+        return categoryId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getTitle() {

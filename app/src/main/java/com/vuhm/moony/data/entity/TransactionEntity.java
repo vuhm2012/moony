@@ -14,8 +14,8 @@ import java.util.UUID;
 public class TransactionEntity {
     @NonNull
     @PrimaryKey
-    @ColumnInfo(name = "id")
-    private String id;
+    @ColumnInfo(name = "transaction_id")
+    private String transactionId;
     @ColumnInfo(name = "title")
     private String title;
     @ColumnInfo(name = "amount")
@@ -34,7 +34,7 @@ public class TransactionEntity {
     private Date updatedDate;
 
     public TransactionEntity() {
-        this.id = UUID.randomUUID().toString();
+        this.transactionId = UUID.randomUUID().toString();
         this.savingId = "-1";
         this.createdDate = Calendar.getInstance().getTime();
         this.updatedDate = Calendar.getInstance().getTime();
@@ -47,7 +47,7 @@ public class TransactionEntity {
             String categoryId,
             String savingId
     ) {
-        this.id = UUID.randomUUID().toString();
+        this.transactionId = UUID.randomUUID().toString();
         this.title = title;
         this.amount = amount;
         this.description = description;
@@ -58,7 +58,7 @@ public class TransactionEntity {
     }
 
     public TransactionEntity(
-            String id,
+            String transactionId,
             String title,
             double amount,
             String description,
@@ -67,7 +67,7 @@ public class TransactionEntity {
             Date createdDate,
             Date updatedDate
     ) {
-        this.id = id;
+        this.transactionId = transactionId;
         this.title = title;
         this.amount = amount;
         this.description = description;
@@ -77,12 +77,12 @@ public class TransactionEntity {
         this.updatedDate = updatedDate;
     }
 
-    public String getId() {
-        return id;
+    public String getTransactionId() {
+        return transactionId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
     public String getTitle() {
