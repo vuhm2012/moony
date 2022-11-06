@@ -17,52 +17,52 @@ public class CategoryEntity {
     @PrimaryKey
     @ColumnInfo(name = "category_id")
     private String categoryId;
-    @ColumnInfo(name = "title")
-    private String title;
-    @ColumnInfo(name = "icon_res_id")
-    private int iconResId;
+    @ColumnInfo(name = "category_title")
+    private String categoryTitle;
+    @ColumnInfo(name = "category_icon_res_id")
+    private int categoryIconResId;
     @ColumnInfo(name = "is_income")
     private boolean isIncome;
-    @ColumnInfo(name = "created_date")
+    @ColumnInfo(name = "category_created_date")
     @TypeConverters(DateConverter.class)
-    private Date createdDate;
-    @ColumnInfo(name = "updated_date")
+    private Date categoryCreatedDate;
+    @ColumnInfo(name = "category_updated_date")
     @TypeConverters(DateConverter.class)
-    private Date updatedDate;
+    private Date categoryUpdatedDate;
 
     public CategoryEntity() {
         this.categoryId = UUID.randomUUID().toString();
-        this.createdDate = Calendar.getInstance().getTime();
-        this.updatedDate = Calendar.getInstance().getTime();
+        this.categoryCreatedDate = Calendar.getInstance().getTime();
+        this.categoryUpdatedDate = Calendar.getInstance().getTime();
     }
 
     public CategoryEntity(
-            String title,
-            int iconResId,
+            String categoryTitle,
+            int categoryIconResId,
             boolean isIncome
     ) {
         this.categoryId = UUID.randomUUID().toString();
-        this.title = title;
-        this.iconResId = iconResId;
+        this.categoryTitle = categoryTitle;
+        this.categoryIconResId = categoryIconResId;
         this.isIncome = isIncome;
-        this.createdDate = Calendar.getInstance().getTime();
-        this.updatedDate = Calendar.getInstance().getTime();
+        this.categoryCreatedDate = Calendar.getInstance().getTime();
+        this.categoryUpdatedDate = Calendar.getInstance().getTime();
     }
 
     public CategoryEntity(
             String catergoryId,
-            String title,
-            int iconResId,
+            String categoryTitle,
+            int categoryIconResId,
             boolean isIncome,
-            Date createdDate,
-            Date updatedDate
+            Date categoryCreatedDate,
+            Date categoryUpdatedDate
     ) {
         this.categoryId = catergoryId;
-        this.title = title;
-        this.iconResId = iconResId;
+        this.categoryTitle = categoryTitle;
+        this.categoryIconResId = categoryIconResId;
         this.isIncome = isIncome;
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
+        this.categoryCreatedDate = categoryCreatedDate;
+        this.categoryUpdatedDate = categoryUpdatedDate;
     }
 
     public String getCategoryId() {
@@ -73,20 +73,20 @@ public class CategoryEntity {
         this.categoryId = categoryId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getCategoryTitle() {
+        return categoryTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCategoryTitle(String categoryTitle) {
+        this.categoryTitle = categoryTitle;
     }
 
-    public int getIconResId() {
-        return iconResId;
+    public int getCategoryIconResId() {
+        return categoryIconResId;
     }
 
-    public void setIconResId(int iconResId) {
-        this.iconResId = iconResId;
+    public void setCategoryIconResId(int categoryIconResId) {
+        this.categoryIconResId = categoryIconResId;
     }
 
     public boolean isIncome() {
@@ -97,19 +97,19 @@ public class CategoryEntity {
         isIncome = income;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public Date getCategoryCreatedDate() {
+        return categoryCreatedDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setCategoryCreatedDate(Date categoryCreatedDate) {
+        this.categoryCreatedDate = categoryCreatedDate;
     }
 
-    public Date getUpdatedDate() {
-        return updatedDate;
+    public Date getCategoryUpdatedDate() {
+        return categoryUpdatedDate;
     }
 
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
+    public void setCategoryUpdatedDate(Date categoryUpdatedDate) {
+        this.categoryUpdatedDate = categoryUpdatedDate;
     }
 }

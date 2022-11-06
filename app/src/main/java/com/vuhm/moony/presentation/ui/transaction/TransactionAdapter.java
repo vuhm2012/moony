@@ -20,12 +20,12 @@ import java.util.List;
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
 
     private Context context;
-    private List<TransactionItem> localDataSet;
+    private List<TransactionItem> transactionItems;
     private OnItemClick<TransactionItem> listener;
 
-    public TransactionAdapter(Context context, List<TransactionItem> localDataSet, OnItemClick listener) {
+    public TransactionAdapter(Context context, List<TransactionItem> transactionItems, OnItemClick listener) {
         this.context = context;
-        this.localDataSet = localDataSet;
+        this.transactionItems = transactionItems;
         this.listener = listener;
     }
 
@@ -82,7 +82,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     }
 
     public void setData(List<TransactionItem> list) {
-        localDataSet = list;
+        transactionItems = list;
     }
 
     @NonNull
@@ -94,14 +94,14 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TransactionItem item = localDataSet.get(position);
-        holder.getLbTransactionTitle().setText(item.getTransaction().getTitle());
+        TransactionItem item = transactionItems.get(position);
+        holder.getLbTransactionTitle().setText(item.getTransaction().getTransactionTitle());
         holder.getCardTransaction().setOnClickListener(view -> listener.onClick(item));
-        holder.getLbTransactionAmount().setText(String.valueOf(item.getTransaction().getAmount()));
-        holder.lbTransactionDescription.setText(item.getTransaction().getDescription());
-        holder.getImgIcon().setImageResource(item.getCategory().getIconResId());
-        holder.getLbCreate().setText(item.getTransaction().getCreatedDate().toString());
-        holder.getLbUpdate().setText(item.getTransaction().getUpdatedDate().toString());
+        holder.getLbTransactionAmount().setText(String.valueOf(item.getTransaction().getTransactionAmount()));
+        holder.lbTransactionDescription.setText(item.getTransaction().getTransactionDescription());
+        holder.getImgIcon().setImageResource(item.getCategory().getCategoryResId());
+        holder.getLbCreate().setText(item.getTransaction().getCreatedTransactionDate().toString());
+        holder.getLbUpdate().setText(item.getTransaction().getUpdatedTransactionDate().toString());
         if (item.getCategory().isIncome()) {
             holder.getImgIcon().setColorFilter(context.getResources().getColor(R.color.color_green));
             holder.getImgType().setImageResource(R.drawable.ic_income);
@@ -118,6 +118,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @Override
     public int getItemCount() {
-        return localDataSet.size();
+        return transactionItems.size();
     }
 }

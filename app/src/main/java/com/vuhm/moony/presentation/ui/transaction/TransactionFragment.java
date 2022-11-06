@@ -48,9 +48,9 @@ public class TransactionFragment extends BaseFragment {
             totalExpenses = 0;
             for (int i = 0; i < transactionItem.size(); i++) {
                 if (transactionItem.get(i).getCategory().isIncome()) {
-                    totalIncomes += transactionItem.get(i).getTransaction().getAmount();
+                    totalIncomes += transactionItem.get(i).getTransaction().getTransactionAmount();
                 } else {
-                    totalExpenses += transactionItem.get(i).getTransaction().getAmount();
+                    totalExpenses += transactionItem.get(i).getTransaction().getTransactionAmount();
                 }
             }
             binding.lbIncomeValue.setText(String.valueOf(totalIncomes));

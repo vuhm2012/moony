@@ -6,78 +6,84 @@ import java.util.UUID;
 
 public class Category {
     private final String categoryId;
-    private String title;
-    private int iconResId;
+    private String categoryTitle;
+    private int categoryResId;
     private boolean isIncome;
-    private final Date createdDate;
-    private final Date updatedDate;
+    private final Date categoryCreatedDate;
+    private Date categoryUpdatedDate;
 
     public Category() {
         this.categoryId = UUID.randomUUID().toString();
-        this.createdDate = Calendar.getInstance().getTime();
-        this.updatedDate = Calendar.getInstance().getTime();
+        this.categoryCreatedDate = Calendar.getInstance().getTime();
+        this.categoryUpdatedDate = Calendar.getInstance().getTime();
     }
 
     public Category(
-            String title,
-            int iconResId,
+            String categoryTitle,
+            int categoryResId,
             boolean isIncome
     ) {
         this.categoryId = UUID.randomUUID().toString();
-        this.title = title;
-        this.iconResId = iconResId;
+        this.categoryTitle = categoryTitle;
+        this.categoryResId = categoryResId;
         this.isIncome = isIncome;
-        this.createdDate = Calendar.getInstance().getTime();
-        this.updatedDate = Calendar.getInstance().getTime();
+        this.categoryCreatedDate = Calendar.getInstance().getTime();
+        this.categoryUpdatedDate = Calendar.getInstance().getTime();
     }
 
     public Category(
             String categoryId,
-            String title,
-            int iconResId,
+            String categoryTitle,
+            int categoryResId,
             boolean isIncome,
-            Date createdDate,
-            Date updatedDate
+            Date categoryCreatedDate,
+            Date categoryUpdatedDate
     ) {
         this.categoryId = categoryId;
-        this.title = title;
-        this.iconResId = iconResId;
+        this.categoryTitle = categoryTitle;
+        this.categoryResId = categoryResId;
         this.isIncome = isIncome;
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
+        this.categoryCreatedDate = categoryCreatedDate;
+        this.categoryUpdatedDate = categoryUpdatedDate;
     }
 
     public String getCategoryId() {
         return categoryId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getCategoryTitle() {
+        return categoryTitle;
     }
 
-    public int getIconResId() {
-        return iconResId;
+    public void setCategoryTitle(String categoryTitle) {
+        this.categoryTitle = categoryTitle;
+    }
+
+    public int getCategoryResId() {
+        return categoryResId;
+    }
+
+    public void setCategoryResId(int categoryResId) {
+        this.categoryResId = categoryResId;
     }
 
     public boolean isIncome() {
         return isIncome;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public void setIncome(boolean income) {
+        isIncome = income;
     }
 
-    public Date getUpdatedDate() {
-        return updatedDate;
+    public Date getCategoryCreatedDate() {
+        return categoryCreatedDate;
     }
 
-    public void updateCategory(
-            String title,
-            int iconResId,
-            boolean isIncome
-    ) {
-        this.title = title;
-        this.iconResId = iconResId;
-        this.isIncome = isIncome;
+    public Date getCategoryUpdatedDate() {
+        return categoryUpdatedDate;
+    }
+
+    public void setCategoryUpdatedDate(Date categoryUpdatedDate) {
+        this.categoryUpdatedDate = categoryUpdatedDate;
     }
 }

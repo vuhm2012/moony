@@ -2,6 +2,7 @@ package com.vuhm.moony.presentation.ui.transaction_detail;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.GridView;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -25,6 +26,8 @@ public class TransactionDetailFragment extends BaseFragment {
     private TransactionDetailViewModel viewModel;
     private String categoryId;
     private String transactionId;
+    private boolean isCreate = true;
+    private Transaction transaction;
 
     @Override
     public int getLayoutId() {
@@ -37,14 +40,25 @@ public class TransactionDetailFragment extends BaseFragment {
         transactionId = getArguments().getString("transactionId");
         binding = (FragmentTransactionDetailBinding) getBinding();
         if (!transactionId.equals("-1") && transactionId != null) {
+            isCreate = false;
             viewModel.getTransactionById(transactionId).observe(getViewLifecycleOwner(), transactionItems -> {
-                for (int i = 0; i < transactionItems.size(); i++) {
-                    TransactionItem item = transactionItems.get(i);
-                    binding.txtTitle.setText(item.getTransaction().getTitle());
-                    binding.txtDescription.setText(item.getTransaction().getDescription());
-                    binding.txtAmount.setText(String.valueOf(item.getTransaction().getAmount()));
-                    binding.imgCategoryIcon.setImageResource(item.getCategory().getIconResId());
-                }
+                TransactionItem transactionItem = transactionItems.get(0);
+                transaction = new Transaction(
+                        transactionItem.getTransaction().getTransactionId(),
+                        transactionItem.getTransaction().getTransactionTitle(),
+                        transactionItem.getTransaction().getTransactionAmount(),
+                        transactionItem.getTransaction().getTransactionDescription(),
+                        transactionItem.getTransaction().getCategoryId(),
+                        transactionItem.getTransaction().getSavingId(),
+                        transactionItem.getTransaction().getCreatedTransactionDate(),
+                        transactionItem.getTransaction().getUpdatedTransactionDate()
+                );
+                categoryId = transaction.getCategoryId();
+                binding.txtTitle.setText(transactionItem.getTransaction().getTransactionTitle());
+                binding.txtDescription.setText(transactionItem.getTransaction().getTransactionDescription());
+                binding.lbCategoryTitle.setText(transactionItem.getCategory().getCategoryTitle());
+                binding.txtAmount.setText(String.valueOf(transactionItem.getTransaction().getTransactionAmount()));
+                binding.imgCategoryIcon.setImageResource(transactionItem.getCategory().getCategoryResId());
             });
         }
     }
@@ -58,7 +72,8 @@ public class TransactionDetailFragment extends BaseFragment {
         binding.layoutCategory.setOnClickListener(view -> {
             viewModel.getCategories().observe(getViewLifecycleOwner(), categories -> {
                 showDialogPickIcon(content -> {
-                    binding.imgCategoryIcon.setImageResource(content.getIconResId());
+                    binding.imgCategoryIcon.setImageResource(content.getCategoryResId());
+                    binding.lbCategoryTitle.setText(content.getCategoryTitle());
                     categoryId = content.getCategoryId();
                 }, categories);
             });
@@ -66,14 +81,30 @@ public class TransactionDetailFragment extends BaseFragment {
         });
 
         binding.btnSave.setOnClickListener(view -> {
-            Transaction transaction = new Transaction(
-                    binding.txtTitle.getText().toString(),
-                    Double.valueOf(binding.txtAmount.getText().toString()),
-                    binding.txtDescription.getText().toString(),
-                    categoryId
-            );
-            viewModel.createTransaction(transaction);
-            pop(view);
+            String title = binding.txtTitle.getText().toString();
+            double amount = Double.parseDouble(binding.txtAmount.getText().toString());
+            String description = binding.txtDescription.getText().toString();
+            if (isCreate) {
+                transaction = new Transaction(
+                        title,
+                        amount,
+                        description,
+                        categoryId
+                );
+                viewModel.createTransaction(transaction);
+                pop(view);
+            } else {
+                transaction.updateTransaction(
+                        title,
+                        description,
+                        amount,
+                        categoryId
+                );
+                Log.d("HIHI", transaction.getTransactionTitle());
+                viewModel.updateTransaction(transaction);
+                Log.d("HIHI", transaction.getTransactionTitle());
+                pop(view);
+            }
         });
     }
 

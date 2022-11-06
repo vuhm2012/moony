@@ -84,9 +84,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             holder.getLbCategoryTitle().setTextColor(context.getResources().getColor(R.color.color_red));
             holder.getImageView().setColorFilter(context.getResources().getColor(R.color.color_red));
         }
-        holder.getLbCategoryTitle().setText(item.getTitle());
+        holder.getLbCategoryTitle().setText(item.getCategoryTitle());
         holder.getCardCategory().setOnClickListener(view -> listener.onClick(item));
-        holder.getImageView().setImageResource(item.getIconResId());
+        holder.getImageView().setImageResource(item.getCategoryResId());
 //        holder.getLbNumOfTransaction().setText(countTransaction);
     }
 

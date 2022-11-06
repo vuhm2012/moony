@@ -16,65 +16,65 @@ public class TransactionEntity {
     @PrimaryKey
     @ColumnInfo(name = "transaction_id")
     private String transactionId;
-    @ColumnInfo(name = "title")
-    private String title;
-    @ColumnInfo(name = "amount")
-    private double amount;
-    @ColumnInfo(name = "description")
-    private String description;
+    @ColumnInfo(name = "transaction_title")
+    private String transactionTitle;
+    @ColumnInfo(name = "transaction_amount")
+    private double transactionAmount;
+    @ColumnInfo(name = "transaction_description")
+    private String transactionDescription;
     @ColumnInfo(name = "category_id")
     private String categoryId;
     @ColumnInfo(name = "saving_id")
     private String savingId;
-    @ColumnInfo(name = "created_date")
+    @ColumnInfo(name = "transaction_created_date")
     @TypeConverters(DateConverter.class)
-    private Date createdDate;
-    @ColumnInfo(name = "updated_date")
+    private Date transactionCreatedDate;
+    @ColumnInfo(name = "transaction_updated_date")
     @TypeConverters(DateConverter.class)
-    private Date updatedDate;
+    private Date transactionUpdatedDate;
 
     public TransactionEntity() {
         this.transactionId = UUID.randomUUID().toString();
         this.savingId = "-1";
-        this.createdDate = Calendar.getInstance().getTime();
-        this.updatedDate = Calendar.getInstance().getTime();
+        this.transactionCreatedDate = Calendar.getInstance().getTime();
+        this.transactionUpdatedDate = Calendar.getInstance().getTime();
     }
 
     public TransactionEntity(
-            String title,
-            double amount,
-            String description,
+            String transactionTitle,
+            double transactionAmount,
+            String transactionDescription,
             String categoryId,
             String savingId
     ) {
         this.transactionId = UUID.randomUUID().toString();
-        this.title = title;
-        this.amount = amount;
-        this.description = description;
+        this.transactionTitle = transactionTitle;
+        this.transactionAmount = transactionAmount;
+        this.transactionDescription = transactionDescription;
         this.categoryId = categoryId;
         this.savingId = savingId;
-        this.createdDate = Calendar.getInstance().getTime();
-        this.updatedDate = Calendar.getInstance().getTime();
+        this.transactionCreatedDate = Calendar.getInstance().getTime();
+        this.transactionUpdatedDate = Calendar.getInstance().getTime();
     }
 
     public TransactionEntity(
             String transactionId,
-            String title,
-            double amount,
-            String description,
+            String transactionTitle,
+            double transactionAmount,
+            String transactionDescription,
             String categoryId,
             String savingId,
-            Date createdDate,
-            Date updatedDate
+            Date transactionCreatedDate,
+            Date transactionUpdatedDate
     ) {
         this.transactionId = transactionId;
-        this.title = title;
-        this.amount = amount;
-        this.description = description;
+        this.transactionTitle = transactionTitle;
+        this.transactionAmount = transactionAmount;
+        this.transactionDescription = transactionDescription;
         this.categoryId = categoryId;
         this.savingId = savingId;
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
+        this.transactionCreatedDate = transactionCreatedDate;
+        this.transactionUpdatedDate = transactionUpdatedDate;
     }
 
     public String getTransactionId() {
@@ -85,28 +85,28 @@ public class TransactionEntity {
         this.transactionId = transactionId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTransactionTitle() {
+        return transactionTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTransactionTitle(String title) {
+        this.transactionTitle = title;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getTransactionAmount() {
+        return transactionAmount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setTransactionAmount(double transactionAmount) {
+        this.transactionAmount = transactionAmount;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTransactionDescription() {
+        return transactionDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTransactionDescription(String transactionDescription) {
+        this.transactionDescription = transactionDescription;
     }
 
     public String getCategoryId() {
@@ -125,19 +125,19 @@ public class TransactionEntity {
         this.savingId = savingId;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public Date getTransactionCreatedDate() {
+        return transactionCreatedDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setTransactionCreatedDate(Date transactionCreatedDate) {
+        this.transactionCreatedDate = transactionCreatedDate;
     }
 
-    public Date getUpdatedDate() {
-        return updatedDate;
+    public Date getTransactionUpdatedDate() {
+        return transactionUpdatedDate;
     }
 
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
+    public void setTransactionUpdatedDate(Date transactionUpdatedDate) {
+        this.transactionUpdatedDate = transactionUpdatedDate;
     }
 }

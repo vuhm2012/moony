@@ -14,11 +14,11 @@ public class SavingMapper implements IMapper<SavingEntity, Saving> {
     public Saving mapFromEntity(SavingEntity savingEntity) {
         return new Saving(
                 savingEntity.getSavingId(),
-                savingEntity.getTitle(),
+                savingEntity.getSavingTitle(),
                 savingEntity.getDescription(),
                 savingEntity.getGoal(),
-                savingEntity.getCreatedAt(),
-                savingEntity.getUpdatedAt()
+                savingEntity.getSavingCreatedAt(),
+                savingEntity.getSavingUpdatedAt()
         );
     }
 

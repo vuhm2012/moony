@@ -17,52 +17,52 @@ public class SavingEntity {
     @PrimaryKey
     @ColumnInfo(name = "saving_id")
     private String savingId;
-    @ColumnInfo(name = "title")
-    private String title;
+    @ColumnInfo(name = "saving_title")
+    private String savingTitle;
     @ColumnInfo(name = "description")
     private String description;
     @ColumnInfo(name = "goal")
     private double goal;
-    @ColumnInfo(name = "created_at")
+    @ColumnInfo(name = "saving_created_at")
     @TypeConverters(DateConverter.class)
-    private Date createdAt;
-    @ColumnInfo(name = "updated+at")
+    private Date savingCreatedAt;
+    @ColumnInfo(name = "saving_updated+at")
     @TypeConverters(DateConverter.class)
-    private Date updatedAt;
+    private Date savingUpdatedAt;
 
     public SavingEntity() {
         this.savingId = UUID.randomUUID().toString();
-        this.createdAt = Calendar.getInstance().getTime();
-        this.updatedAt = Calendar.getInstance().getTime();
+        this.savingCreatedAt = Calendar.getInstance().getTime();
+        this.savingUpdatedAt = Calendar.getInstance().getTime();
     }
 
     public SavingEntity(
-            String title,
+            String savingTitle,
             String description,
             double goal
     ) {
         this.savingId = UUID.randomUUID().toString();
-        this.title = title;
+        this.savingTitle = savingTitle;
         this.description = description;
         this.goal = goal;
-        this.createdAt = Calendar.getInstance().getTime();
-        this.updatedAt = Calendar.getInstance().getTime();
+        this.savingCreatedAt = Calendar.getInstance().getTime();
+        this.savingUpdatedAt = Calendar.getInstance().getTime();
     }
 
     public SavingEntity(
             String savingId,
-            String title,
+            String savingTitle,
             String description,
             double goal,
-            Date createdAt,
-            Date updatedAt
+            Date savingCreatedAt,
+            Date savingUpdatedAt
     ) {
         this.savingId = savingId;
-        this.title = title;
+        this.savingTitle = savingTitle;
         this.description = description;
         this.goal = goal;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.savingCreatedAt = savingCreatedAt;
+        this.savingUpdatedAt = savingUpdatedAt;
     }
 
     @NonNull
@@ -74,12 +74,12 @@ public class SavingEntity {
         this.savingId = savingId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getSavingTitle() {
+        return savingTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setSavingTitle(String savingTitle) {
+        this.savingTitle = savingTitle;
     }
 
     public String getDescription() {
@@ -98,19 +98,19 @@ public class SavingEntity {
         this.goal = goal;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getSavingCreatedAt() {
+        return savingCreatedAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setSavingCreatedAt(Date savingCreatedAt) {
+        this.savingCreatedAt = savingCreatedAt;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public Date getSavingUpdatedAt() {
+        return savingUpdatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setSavingUpdatedAt(Date savingUpdatedAt) {
+        this.savingUpdatedAt = savingUpdatedAt;
     }
 }

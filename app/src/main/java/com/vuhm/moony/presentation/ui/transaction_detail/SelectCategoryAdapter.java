@@ -48,8 +48,8 @@ public class SelectCategoryAdapter extends BaseAdapter {
         TextView title;
         icon = view.findViewById(R.id.img_icon);
         title = view.findViewById(R.id.lb_title);
-        icon.setImageResource(categories.get(i).getIconResId());
-        title.setText(categories.get(i).getTitle());
+        icon.setImageResource(categories.get(i).getCategoryResId());
+        title.setText(categories.get(i).getCategoryTitle());
         return view;
     }
 }

@@ -38,6 +38,10 @@ public class TransactionDetailViewModel extends BaseViewModel {
         transactionRepository.createTransaction(transaction).subscribeOn(Schedulers.io()).subscribe();
     }
 
+    public void updateTransaction(Transaction transaction) {
+        transactionRepository.updateTransaction(transaction).subscribeOn(Schedulers.io()).subscribe();
+    }
+
     public LiveData<List<TransactionItem>> getTransactionById(String id) {
         return fromObservableToLiveData(transactionRepository.getTransactionById(id));
     }

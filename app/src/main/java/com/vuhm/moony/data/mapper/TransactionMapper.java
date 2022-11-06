@@ -14,13 +14,13 @@ public class TransactionMapper implements IMapper<TransactionEntity, Transaction
     public Transaction mapFromEntity(TransactionEntity transaction) {
         return new Transaction(
                 transaction.getTransactionId(),
-                transaction.getTitle(),
-                transaction.getAmount(),
-                transaction.getDescription(),
+                transaction.getTransactionTitle(),
+                transaction.getTransactionAmount(),
+                transaction.getTransactionDescription(),
                 transaction.getCategoryId(),
                 transaction.getSavingId(),
-                transaction.getCreatedDate(),
-                transaction.getUpdatedDate()
+                transaction.getTransactionCreatedDate(),
+                transaction.getTransactionUpdatedDate()
         );
     }
 
@@ -28,13 +28,13 @@ public class TransactionMapper implements IMapper<TransactionEntity, Transaction
     public TransactionEntity mapToEntity(Transaction transaction) {
         return new TransactionEntity(
                 transaction.getTransactionId(),
-                transaction.getTitle(),
-                transaction.getAmount(),
-                transaction.getDescription(),
+                transaction.getTransactionTitle(),
+                transaction.getTransactionAmount(),
+                transaction.getTransactionDescription(),
                 transaction.getCategoryId(),
                 transaction.getSavingId(),
-                transaction.getCreatedDate(),
-                transaction.getUpdatedDate()
+                transaction.getCreatedTransactionDate(),
+                transaction.getUpdatedTransactionDate()
         );
     }
 

@@ -16,11 +16,11 @@ public class CategoryMapper implements IMapper<CategoryEntity, Category> {
     public Category mapFromEntity(CategoryEntity category) {
         return new Category(
                 category.getCategoryId(),
-                category.getTitle(),
-                category.getIconResId(),
+                category.getCategoryTitle(),
+                category.getCategoryIconResId(),
                 category.isIncome(),
-                category.getCreatedDate(),
-                category.getUpdatedDate()
+                category.getCategoryCreatedDate(),
+                category.getCategoryUpdatedDate()
         );
     }
 
@@ -28,11 +28,11 @@ public class CategoryMapper implements IMapper<CategoryEntity, Category> {
     public CategoryEntity mapToEntity(Category category) {
         return new CategoryEntity(
                 category.getCategoryId(),
-                category.getTitle(),
-                category.getIconResId(),
+                category.getCategoryTitle(),
+                category.getCategoryResId(),
                 category.isIncome(),
-                category.getCreatedDate(),
-                category.getUpdatedDate()
+                category.getCategoryCreatedDate(),
+                category.getCategoryUpdatedDate()
         );
     }
 
