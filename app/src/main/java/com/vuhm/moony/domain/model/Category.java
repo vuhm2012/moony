@@ -86,4 +86,14 @@ public class Category {
     public void setCategoryUpdatedDate(Date categoryUpdatedDate) {
         this.categoryUpdatedDate = categoryUpdatedDate;
     }
+
+    public void updateCategory(
+            String categoryTitle,
+            int iconResId,
+            boolean isIncome
+    ) {
+        this.categoryTitle = categoryTitle;
+        this.categoryResId = iconResId;
+        this.isIncome = isIncome;
+    }
 }

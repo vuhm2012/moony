@@ -2,20 +2,25 @@ package com.vuhm.moony.presentation.ui.category_detail;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.vuhm.moony.R;
 import com.vuhm.moony.core.utils.OnItemClick;
 import com.vuhm.moony.databinding.FragmentCategoryDetailBinding;
 import com.vuhm.moony.domain.model.Category;
 import com.vuhm.moony.domain.model.CategoryIcon;
+import com.vuhm.moony.domain.model.TransactionItem;
 import com.vuhm.moony.presentation.base.BaseFragment;
+import com.vuhm.moony.presentation.ui.transaction.TransactionAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -25,6 +30,10 @@ public class CategoryDetailFragment extends BaseFragment {
     private FragmentCategoryDetailBinding binding;
     private CategoryDetailViewModel viewModel;
     private int iconResId = -1;
+    private boolean isCreate = true;
+    private String categoryId;
+    private Category category;
+    private TransactionAdapter adapter;
 
     @Override
     public int getLayoutId() {
@@ -34,8 +43,41 @@ public class CategoryDetailFragment extends BaseFragment {
     @Override
     public void initControls(Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(CategoryDetailViewModel.class);
+        categoryId = getArguments().getString("categoryId");
         binding = (FragmentCategoryDetailBinding) getBinding();
         binding.rdbIncome.setChecked(true);
+        if (!Objects.equals(categoryId, "-1") && categoryId != null) {
+            isCreate = false;
+            viewModel.getCategoryById(categoryId).observe(getViewLifecycleOwner(), categories -> {
+                category = categories.get(0);
+                binding.txtTitle.setText(category.getCategoryTitle());
+                binding.imgIcon.setImageResource(category.getCategoryResId());
+                iconResId = category.getCategoryResId();
+                if (category.isIncome()) {
+                    binding.rdgIsIncome.check(R.id.rdb_income);
+                } else {
+                    binding.rdgIsIncome.check(R.id.rdb_expenses);
+                }
+            });
+        }
+
+        binding.rcvTransactions.setLayoutManager(new LinearLayoutManager(baseContext));
+        viewModel.getTransactionsByCategory(categoryId).observe(getViewLifecycleOwner(), transactionItem -> {
+            adapter = new TransactionAdapter(requireContext(), transactionItem, data -> {
+                TransactionItem item = (TransactionItem) data;
+                CategoryDetailFragmentDirections.ActionCategoryDetailFragmentToTransactionDetailFragment action =
+                        CategoryDetailFragmentDirections.actionCategoryDetailFragmentToTransactionDetailFragment();
+                action.setTransactionId(item.getTransaction().getTransactionId());
+                Navigation.findNavController(this.getView()).navigate(action);
+            });
+            binding.rcvTransactions.setAdapter(adapter);
+        });
+
+        viewModel.getTransactionsByCategory(categoryId).observe(getViewLifecycleOwner(), transactionItems -> {
+            for (int i = 0; i < transactionItems.size(); i++) {
+                Log.d("HIHI", transactionItems.get(i).getTransaction().getTransactionTitle());
+            }
+        });
     }
 
     @Override
@@ -43,9 +85,18 @@ public class CategoryDetailFragment extends BaseFragment {
         binding.btnBack.setOnClickListener(this::pop);
 
         binding.btnSave.setOnClickListener(view -> {
-            createCategory();
-            pop(view);
-            Toast.makeText(requireContext(), "Create category done", Toast.LENGTH_SHORT).show();
+            if (isCreate) {
+                createCategory();
+                pop(view);
+            } else {
+                category.updateCategory(
+                        binding.txtTitle.getText().toString(),
+                        iconResId,
+                        binding.rdgIsIncome.getCheckedRadioButtonId() == R.id.rdb_income
+                );
+                viewModel.updateCategory(category);
+                pop(view);
+            }
         });
 
         binding.layoutIcon.setOnClickListener(view -> {
@@ -54,6 +105,7 @@ public class CategoryDetailFragment extends BaseFragment {
                 iconResId = content.getIconResId();
             });
         });
+
     }
 
     private void createCategory() {

@@ -1,8 +1,13 @@
 package com.vuhm.moony.presentation.ui.category_detail;
 
+import androidx.lifecycle.LiveData;
+
 import com.vuhm.moony.domain.model.Category;
+import com.vuhm.moony.domain.model.TransactionItem;
 import com.vuhm.moony.domain.repository.CategoryRepository;
 import com.vuhm.moony.presentation.base.BaseViewModel;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -29,5 +34,13 @@ public class CategoryDetailViewModel extends BaseViewModel {
 
     public void deleteCategory(String id) {
         categoryRepository.deleteCategoryById(id).subscribeOn(Schedulers.io()).subscribe();
+    }
+
+    public LiveData<List<Category>> getCategoryById(String id) {
+        return fromObservableToLiveData(categoryRepository.getCategoryId(id));
+    }
+
+    public LiveData<List<TransactionItem>> getTransactionsByCategory(String categoryId) {
+        return fromObservableToLiveData(categoryRepository.getTransactionsByCategory(categoryId));
     }
 }

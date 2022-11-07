@@ -1,14 +1,16 @@
 package com.vuhm.moony.presentation.ui.category;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.vuhm.moony.R;
 import com.vuhm.moony.databinding.FragmentCategoryBinding;
+import com.vuhm.moony.domain.model.Category;
 import com.vuhm.moony.presentation.base.BaseFragment;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -43,7 +45,12 @@ public class CategoryFragment extends BaseFragment {
                 binding.imgNoData.setVisibility(View.VISIBLE);
             } else {
                 adapter = new CategoryAdapter(requireContext(), categories, data -> {
-                    Toast.makeText(baseContext, "Data: " + data, Toast.LENGTH_SHORT).show();
+                    Category category = (Category) data;
+                    CategoryFragmentDirections.ActionCategoryFragmentToCategoryDetailFragment action =
+                            CategoryFragmentDirections.actionCategoryFragmentToCategoryDetailFragment();
+                    Log.d("HIHI", "Param: " + category.getCategoryId());
+                    action.setCategoryId(category.getCategoryId());
+                    Navigation.findNavController(this.getView()).navigate(action);
                 });
                 binding.rcvCategory.setAdapter(adapter);
             }

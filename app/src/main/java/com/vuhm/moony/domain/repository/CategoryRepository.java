@@ -1,6 +1,7 @@
 package com.vuhm.moony.domain.repository;
 
 import com.vuhm.moony.domain.model.Category;
+import com.vuhm.moony.domain.model.TransactionItem;
 
 import java.util.List;
 
@@ -21,4 +22,8 @@ public interface CategoryRepository {
     Observable<List<Category>> getAllCategories();
 
     Single<Integer> countTransactionByCategoryId(String categoryId);
+
+    Observable<List<Category>> getCategoryId(String categoryId);
+
+    Observable<List<TransactionItem>> getTransactionsByCategory(String categoryId);
 }

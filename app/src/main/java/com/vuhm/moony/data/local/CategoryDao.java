@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.vuhm.moony.data.entity.CategoryEntity;
+import com.vuhm.moony.data.entity.TransactionItemEntity;
 
 import java.util.List;
 
@@ -36,4 +37,11 @@ public interface CategoryDao {
     @Query("SELECT COUNT(transaction_id) FROM `transaction` WHERE category_id = :categoryId")
     Single<Integer> countTransactionByCategoryId(String categoryId);
 
+    @Query("SELECT * FROM `category` WHERE category_id = :categoryId")
+    Observable<List<CategoryEntity>> getCategoryById(String categoryId);
+
+    @Query("SELECT * FROM `transaction` " +
+            "INNER JOIN `category` ON `transaction`.category_id = category.category_id WHERE " +
+            "`category`.category_id = :categoryId ")
+    Observable<List<TransactionItemEntity>> getTransactionsByCategory(String categoryId);
 }

@@ -43,8 +43,12 @@ public class RepositoryModule {
 
     @Singleton
     @Provides
-    CategoryRepository provideCategoryRepository(CategoryDao categoryDao, CategoryMapper categoryMapper) {
-        return new CategoryRepositoryImpl(categoryDao, categoryMapper);
+    CategoryRepository provideCategoryRepository(
+            CategoryDao categoryDao,
+            CategoryMapper categoryMapper,
+            TransactionItemMapper transactionItemMapper
+    ) {
+        return new CategoryRepositoryImpl(categoryDao, categoryMapper, transactionItemMapper);
     }
 
     @Singleton
