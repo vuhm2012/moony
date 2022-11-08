@@ -3,6 +3,7 @@ package com.vuhm.moony.presentation.ui.transaction_detail;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.GridView;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -40,6 +41,7 @@ public class TransactionDetailFragment extends BaseFragment {
         transactionId = getArguments().getString("transactionId");
         binding = (FragmentTransactionDetailBinding) getBinding();
         if (!transactionId.equals("-1") && transactionId != null) {
+            binding.btnDelete.setVisibility(View.VISIBLE);
             isCreate = false;
             viewModel.getTransactionById(transactionId).observe(getViewLifecycleOwner(), transactionItems -> {
                 TransactionItem transactionItem = transactionItems.get(0);
@@ -105,6 +107,19 @@ public class TransactionDetailFragment extends BaseFragment {
                 Log.d("HIHI", transaction.getTransactionTitle());
                 pop(view);
             }
+        });
+
+        binding.btnDelete.setOnClickListener(view -> {
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Delete entry")
+                    .setMessage("Are you sure you want to delete this entry?")
+                    .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                        pop(view);
+                        viewModel.deleteTransactionById(transactionId);
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         });
     }
 

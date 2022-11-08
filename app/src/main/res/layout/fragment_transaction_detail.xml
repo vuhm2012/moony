@@ -151,12 +151,22 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Spinner
-                    android:id="@+id/spinner_category"
+                    android:id="@+id/spinner_saving"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_margin="16dp"
                     android:spinnerMode="dialog"
                     app:layout_constraintTop_toBottomOf="@id/layout_category" />
+
+                <Button
+                    android:id="@+id/btn_delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:backgroundTint="@color/color_red"
+                    android:text="Delete"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_saving" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

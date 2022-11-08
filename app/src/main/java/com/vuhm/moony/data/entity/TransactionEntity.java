@@ -3,17 +3,31 @@ package com.vuhm.moony.data.entity;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import androidx.room.ForeignKey;
 import androidx.room.TypeConverters;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
-@Entity(tableName = "transaction")
+@Entity(tableName = "transaction", primaryKeys = "transaction_id", foreignKeys = {
+        @ForeignKey(
+                entity = CategoryEntity.class,
+                parentColumns = "category_id",
+                childColumns = "category_id",
+                onDelete = ForeignKey.CASCADE,
+                onUpdate = ForeignKey.CASCADE
+        ),
+        @ForeignKey(
+                entity = SavingEntity.class,
+                parentColumns = "saving_id",
+                childColumns = "saving_id",
+                onDelete = ForeignKey.CASCADE,
+                onUpdate = ForeignKey.CASCADE
+        )
+})
 public class TransactionEntity {
     @NonNull
-    @PrimaryKey
     @ColumnInfo(name = "transaction_id")
     private String transactionId;
     @ColumnInfo(name = "transaction_title")

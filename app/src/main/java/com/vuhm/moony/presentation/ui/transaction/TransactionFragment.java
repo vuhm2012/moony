@@ -1,7 +1,6 @@
 package com.vuhm.moony.presentation.ui.transaction;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -43,32 +42,30 @@ public class TransactionFragment extends BaseFragment {
         viewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
 
         binding.rcvTransactions.setLayoutManager(new LinearLayoutManager(baseContext));
-        viewModel.getTransactions().observe(getViewLifecycleOwner(), transactionItem -> {
+        viewModel.getTransactions().observe(getViewLifecycleOwner(), transactionItems -> {
             totalIncomes = 0;
             totalExpenses = 0;
-            for (int i = 0; i < transactionItem.size(); i++) {
-                if (transactionItem.get(i).getCategory().isIncome()) {
-                    totalIncomes += transactionItem.get(i).getTransaction().getTransactionAmount();
-                } else {
-                    totalExpenses += transactionItem.get(i).getTransaction().getTransactionAmount();
+            if (transactionItems.size() == 0) {
+                binding.imgNoData.setVisibility(View.VISIBLE);
+            } else {
+                for (int i = 0; i < transactionItems.size(); i++) {
+                    if (transactionItems.get(i).getCategory().isIncome()) {
+                        totalIncomes += transactionItems.get(i).getTransaction().getTransactionAmount();
+                    } else {
+                        totalExpenses += transactionItems.get(i).getTransaction().getTransactionAmount();
+                    }
                 }
+                binding.lbIncomeValue.setText(String.valueOf(totalIncomes));
+                binding.lbExpenseValue.setText(String.valueOf(totalExpenses));
+                adapter = new TransactionAdapter(requireContext(), transactionItems, data -> {
+                    TransactionItem item = (TransactionItem) data;
+                    TransactionFragmentDirections.ActionTransactionFragmentToTransactionDetailFragment action =
+                            TransactionFragmentDirections.actionTransactionFragmentToTransactionDetailFragment();
+                    action.setTransactionId(item.getTransaction().getTransactionId());
+                    Navigation.findNavController(this.getView()).navigate(action);
+                });
+                binding.rcvTransactions.setAdapter(adapter);
             }
-            binding.lbIncomeValue.setText(String.valueOf(totalIncomes));
-            binding.lbExpenseValue.setText(String.valueOf(totalExpenses));
-            adapter = new TransactionAdapter(requireContext(), transactionItem, data -> {
-                for (int i = 0; i < transactionItem.size(); i++) {
-                    Log.d("HIHI", "Txn: " + transactionItem.get(i).getTransaction().getTransactionId());
-                    Log.d("HIHI", "Cat: " + transactionItem.get(i).getCategory().getCategoryId());
-                }
-
-                TransactionItem item = (TransactionItem) data;
-                TransactionFragmentDirections.ActionTransactionFragmentToTransactionDetailFragment action =
-                        TransactionFragmentDirections.actionTransactionFragmentToTransactionDetailFragment();
-                Log.d("HIHI", "Param: " + item.getTransaction().getTransactionId());
-                action.setTransactionId(item.getTransaction().getTransactionId());
-                Navigation.findNavController(this.getView()).navigate(action);
-            });
-            binding.rcvTransactions.setAdapter(adapter);
         });
     }
 

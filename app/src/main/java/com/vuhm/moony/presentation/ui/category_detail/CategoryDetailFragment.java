@@ -3,6 +3,7 @@ package com.vuhm.moony.presentation.ui.category_detail;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.GridView;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -47,6 +48,7 @@ public class CategoryDetailFragment extends BaseFragment {
         binding = (FragmentCategoryDetailBinding) getBinding();
         binding.rdbIncome.setChecked(true);
         if (!Objects.equals(categoryId, "-1") && categoryId != null) {
+            binding.btnDelete.setVisibility(View.VISIBLE);
             isCreate = false;
             viewModel.getCategoryById(categoryId).observe(getViewLifecycleOwner(), categories -> {
                 category = categories.get(0);
@@ -104,6 +106,19 @@ public class CategoryDetailFragment extends BaseFragment {
                 binding.imgIcon.setImageResource(content.getIconResId());
                 iconResId = content.getIconResId();
             });
+        });
+
+        binding.btnDelete.setOnClickListener(view -> {
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Delete entry")
+                    .setMessage("Are you sure you want to delete this entry?")
+                    .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                        pop(view);
+                        viewModel.deleteCategory(categoryId);
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         });
 
     }

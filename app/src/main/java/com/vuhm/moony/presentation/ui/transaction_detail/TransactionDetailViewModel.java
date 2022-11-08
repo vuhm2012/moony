@@ -42,6 +42,10 @@ public class TransactionDetailViewModel extends BaseViewModel {
         transactionRepository.updateTransaction(transaction).subscribeOn(Schedulers.io()).subscribe();
     }
 
+    public void deleteTransactionById(String id) {
+        transactionRepository.deleteTransactionById(id).subscribeOn(Schedulers.io()).subscribe();
+    }
+
     public LiveData<List<TransactionItem>> getTransactionById(String id) {
         return fromObservableToLiveData(transactionRepository.getTransactionById(id));
     }
