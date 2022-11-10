@@ -53,8 +53,12 @@ public class RepositoryModule {
 
     @Singleton
     @Provides
-    SavingRepository provideSavingRepository(SavingDao savingDao, SavingMapper savingMapper) {
-        return new SavingRepositoryImpl(savingDao, savingMapper);
+    SavingRepository provideSavingRepository(
+            SavingDao savingDao,
+            SavingMapper savingMapper,
+            TransactionItemMapper transactionItemMapper
+    ) {
+        return new SavingRepositoryImpl(savingDao, savingMapper, transactionItemMapper);
     }
 
     @Singleton

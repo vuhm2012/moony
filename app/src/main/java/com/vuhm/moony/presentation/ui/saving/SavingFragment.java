@@ -39,15 +39,19 @@ public class SavingFragment extends BaseFragment {
         binding = (FragmentSavingBinding) getBinding();
         viewModel = new ViewModelProvider(this).get(SavingViewModel.class);
         viewModel.getAllSavings().observe(getViewLifecycleOwner(), savings -> {
-            adapter = new SavingAdapter(savings, data -> {
-                Saving item = (Saving) data;
-                SavingFragmentDirections.ActionSavingFragmentToSavingDetailFragment action =
-                        SavingFragmentDirections.actionSavingFragmentToSavingDetailFragment();
-                action.setSavingId(item.getId());
-                Navigation.findNavController(this.getView()).navigate(action);
-            });
-            binding.rcvSavings.setLayoutManager(new LinearLayoutManager(baseContext));
-            binding.rcvSavings.setAdapter(adapter);
+            if (savings.size() == 0) {
+                binding.imgNoData.setVisibility(View.VISIBLE);
+            } else {
+                adapter = new SavingAdapter(savings, data -> {
+                    Saving item = (Saving) data;
+                    SavingFragmentDirections.ActionSavingFragmentToSavingDetailFragment action =
+                            SavingFragmentDirections.actionSavingFragmentToSavingDetailFragment();
+                    action.setSavingId(item.getId());
+                    Navigation.findNavController(this.getView()).navigate(action);
+                }, 20);
+                binding.rcvSavings.setLayoutManager(new LinearLayoutManager(baseContext));
+                binding.rcvSavings.setAdapter(adapter);
+            }
         });
     }
 

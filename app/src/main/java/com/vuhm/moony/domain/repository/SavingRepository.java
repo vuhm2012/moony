@@ -1,6 +1,7 @@
 package com.vuhm.moony.domain.repository;
 
 import com.vuhm.moony.domain.model.Saving;
+import com.vuhm.moony.domain.model.TransactionItem;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface SavingRepository {
     Observable<List<Saving>> getAllSavings();
 
     Observable<List<Saving>> getSavingById(String savingId);
+
+    Observable<List<TransactionItem>> getTransactionsBySaving(String savingId);
 }

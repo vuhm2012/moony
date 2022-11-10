@@ -20,10 +20,12 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
 
     private final List<Saving> savings;
     private final OnItemClick<Saving> listener;
+    private final double savingAmount;
 
-    public SavingAdapter(List<Saving> savings, OnItemClick listener) {
+    public SavingAdapter(List<Saving> savings, OnItemClick listener, double savingAmount) {
         this.savings = savings;
         this.listener = listener;
+        this.savingAmount = savingAmount;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -93,8 +95,8 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
         holder.getLbSavingGoal().setText(String.valueOf(item.getGoal()));
         holder.getLbCreatedAt().setText(item.getCreatedAt().toString());
         holder.getLbUpdatedAt().setText(item.getUpdatedAt().toString());
-        holder.getLbSavingAmount().setText("200");
-        holder.getPrgSaving().setProgress(50);
+        holder.getLbSavingAmount().setText(String.valueOf(savingAmount));
+        holder.getPrgSaving().setProgress((int) savingAmount);
     }
 
     @Override

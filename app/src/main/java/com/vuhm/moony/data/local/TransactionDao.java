@@ -33,13 +33,12 @@ public interface TransactionDao {
     Observable<List<TransactionEntity>> getAllTransactions();
 
     @Query("SELECT * FROM `transaction` " +
-            "INNER JOIN `category` ON `transaction`.category_id = category.category_id "
-//            "INNER JOIN `saving` ON saving_id = saving.id " +
-//            "WHERE category_id = :categoryId " +
-//            "AND saving_id = :savingId"
+            "INNER JOIN `category` ON `transaction`.category_id = `category`.category_id "
     )
     Observable<List<TransactionItemEntity>> getAllTransaction();
 
-    @Query("SELECT * FROM `transaction` INNER JOIN `category` ON `transaction`.category_id = `category`.category_id WHERE `transaction`.transaction_id = :id")
+    @Query("SELECT * FROM `transaction` INNER JOIN `category` " +
+            "ON `transaction`.category_id = `category`.category_id " +
+            "WHERE `transaction`.transaction_id = :id")
     Observable<List<TransactionItemEntity>> getTransactionById(String id);
 }
