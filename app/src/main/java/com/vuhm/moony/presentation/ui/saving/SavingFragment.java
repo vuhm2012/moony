@@ -2,16 +2,15 @@ package com.vuhm.moony.presentation.ui.saving;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.vuhm.moony.R;
 import com.vuhm.moony.databinding.FragmentSavingBinding;
+import com.vuhm.moony.domain.model.Saving;
 import com.vuhm.moony.presentation.base.BaseFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -20,6 +19,7 @@ public class SavingFragment extends BaseFragment {
 
     private FragmentSavingBinding binding;
     private SavingAdapter adapter;
+    private SavingViewModel viewModel;
 
     @Override
     public int getLayoutId() {
@@ -36,24 +36,19 @@ public class SavingFragment extends BaseFragment {
 
     @Override
     public void initControls(Bundle savedInstanceState) {
-        List<String> list = new ArrayList();
-        list.add("Mua oto");
-        list.add("Mua xe may");
-        list.add("Mua nha");
-        list.add("Mua may tinh");
-        list.add("Mua ipad");
-        list.add("Mua airpod");
-        list.add("Mua dien thoai");
-        list.add("Mua iphone");
-        list.add("Mua oppo");
-        list.add("Mua samsung");
-        list.add("Mua realme");
         binding = (FragmentSavingBinding) getBinding();
-        adapter = new SavingAdapter(list, data -> {
-            Toast.makeText(baseContext, "Data: " + data, Toast.LENGTH_SHORT).show();
+        viewModel = new ViewModelProvider(this).get(SavingViewModel.class);
+        viewModel.getAllSavings().observe(getViewLifecycleOwner(), savings -> {
+            adapter = new SavingAdapter(savings, data -> {
+                Saving item = (Saving) data;
+                SavingFragmentDirections.ActionSavingFragmentToSavingDetailFragment action =
+                        SavingFragmentDirections.actionSavingFragmentToSavingDetailFragment();
+                action.setSavingId(item.getId());
+                Navigation.findNavController(this.getView()).navigate(action);
+            });
+            binding.rcvSavings.setLayoutManager(new LinearLayoutManager(baseContext));
+            binding.rcvSavings.setAdapter(adapter);
         });
-        binding.rcvSavings.setLayoutManager(new LinearLayoutManager(baseContext));
-        binding.rcvSavings.setAdapter(adapter);
     }
 
     @Override

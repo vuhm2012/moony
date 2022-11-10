@@ -23,7 +23,12 @@
         android:label="SavingFragment">
         <action
             android:id="@+id/action_savingFragment_to_savingDetailFragment"
-            app:destination="@id/savingDetailFragment" />
+            app:destination="@id/savingDetailFragment">
+            <argument
+                android:name="savingId"
+                android:defaultValue="-1"
+                app:argType="string" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/settingFragment"

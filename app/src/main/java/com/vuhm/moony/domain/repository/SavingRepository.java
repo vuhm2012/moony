@@ -19,4 +19,5 @@ public interface SavingRepository {
 
     Observable<List<Saving>> getAllSavings();
 
+    Observable<List<Saving>> getSavingById(String savingId);
 }

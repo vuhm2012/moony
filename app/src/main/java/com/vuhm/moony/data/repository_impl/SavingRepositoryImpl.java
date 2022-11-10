@@ -47,4 +47,9 @@ public class SavingRepositoryImpl implements SavingRepository {
     public Observable<List<Saving>> getAllSavings() {
         return savingMapper.mapFromEntityList(savingDao.getAllSavings());
     }
+
+    @Override
+    public Observable<List<Saving>> getSavingById(String savingId) {
+        return savingMapper.mapFromEntityList(savingDao.getSavingById(savingId));
+    }
 }

@@ -29,4 +29,7 @@ public interface SavingDao {
 
     @Query("SELECT * FROM `saving`")
     Observable<List<SavingEntity>> getAllSavings();
+
+    @Query("SELECT * FROM `saving` WHERE saving_id = :savingId")
+    Observable<List<SavingEntity>> getSavingById(String savingId);
 }
