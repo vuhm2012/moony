@@ -36,11 +36,18 @@ public class TransactionFragment extends BaseFragment {
         }
     }
 
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        if (getActivityViewById(R.id.bottom_bar).getVisibility() == View.VISIBLE) {
+//            getActivityViewById(R.id.bottom_bar).setVisibility(View.GONE);
+//        }
+//    }
+
     @Override
     public void initControls(Bundle savedInstanceState) {
         binding = (FragmentTransactionBinding) getBinding();
         viewModel = new ViewModelProvider(this).get(TransactionViewModel.class);
-
         binding.rcvTransactions.setLayoutManager(new LinearLayoutManager(baseContext));
         viewModel.getTransactions().observe(getViewLifecycleOwner(), transactionItems -> {
             totalIncomes = 0;
@@ -58,6 +65,7 @@ public class TransactionFragment extends BaseFragment {
                 binding.lbIncomeValue.setText(String.valueOf(totalIncomes));
                 binding.lbExpenseValue.setText(String.valueOf(totalExpenses));
                 adapter = new TransactionAdapter(requireContext(), transactionItems, data -> {
+                    getActivityViewById(R.id.bottom_bar).setVisibility(View.GONE);
                     TransactionItem item = (TransactionItem) data;
                     TransactionFragmentDirections.ActionTransactionFragmentToTransactionDetailFragment action =
                             TransactionFragmentDirections.actionTransactionFragmentToTransactionDetailFragment();

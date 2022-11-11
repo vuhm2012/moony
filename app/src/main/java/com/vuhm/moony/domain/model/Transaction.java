@@ -133,12 +133,14 @@ public class Transaction {
             String transactionTitle,
             String transactionDescription,
             double transactionAmount,
-            String categoryId
+            String categoryId,
+            String savingId
     ) {
         this.transactionTitle = transactionTitle;
         this.transactionDescription = transactionDescription;
         this.transactionAmount = transactionAmount;
         this.categoryId = categoryId;
+        this.savingId = savingId;
         this.updatedTransactionDate = Calendar.getInstance().getTime();
     }
 }

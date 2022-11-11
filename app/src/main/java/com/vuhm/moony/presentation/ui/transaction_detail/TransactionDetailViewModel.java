@@ -3,9 +3,11 @@ package com.vuhm.moony.presentation.ui.transaction_detail;
 import androidx.lifecycle.LiveData;
 
 import com.vuhm.moony.domain.model.Category;
+import com.vuhm.moony.domain.model.Saving;
 import com.vuhm.moony.domain.model.Transaction;
 import com.vuhm.moony.domain.model.TransactionItem;
 import com.vuhm.moony.domain.repository.CategoryRepository;
+import com.vuhm.moony.domain.repository.SavingRepository;
 import com.vuhm.moony.domain.repository.TransactionRepository;
 import com.vuhm.moony.presentation.base.BaseViewModel;
 
@@ -20,14 +22,17 @@ import io.reactivex.schedulers.Schedulers;
 public class TransactionDetailViewModel extends BaseViewModel {
     private CategoryRepository categoryRepository;
     private TransactionRepository transactionRepository;
+    private SavingRepository savingRepository;
 
     @Inject
     public TransactionDetailViewModel(
             CategoryRepository categoryRepository,
-            TransactionRepository transactionRepository
+            TransactionRepository transactionRepository,
+            SavingRepository savingRepository
     ) {
         this.categoryRepository = categoryRepository;
         this.transactionRepository = transactionRepository;
+        this.savingRepository = savingRepository;
     }
 
     public LiveData<List<Category>> getCategories() {
@@ -48,5 +53,9 @@ public class TransactionDetailViewModel extends BaseViewModel {
 
     public LiveData<List<TransactionItem>> getTransactionById(String id) {
         return fromObservableToLiveData(transactionRepository.getTransactionById(id));
+    }
+
+    public LiveData<List<Saving>> getAllSavings() {
+        return fromObservableToLiveData(savingRepository.getAllSavings());
     }
 }

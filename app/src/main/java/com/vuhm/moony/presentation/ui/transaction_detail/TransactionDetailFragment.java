@@ -12,6 +12,7 @@ import com.vuhm.moony.R;
 import com.vuhm.moony.core.utils.OnItemClick;
 import com.vuhm.moony.databinding.FragmentTransactionDetailBinding;
 import com.vuhm.moony.domain.model.Category;
+import com.vuhm.moony.domain.model.Saving;
 import com.vuhm.moony.domain.model.Transaction;
 import com.vuhm.moony.domain.model.TransactionItem;
 import com.vuhm.moony.presentation.base.BaseFragment;
@@ -26,6 +27,7 @@ public class TransactionDetailFragment extends BaseFragment {
     private FragmentTransactionDetailBinding binding;
     private TransactionDetailViewModel viewModel;
     private String categoryId;
+    private String savingId;
     private String transactionId;
     private boolean isCreate = true;
     private Transaction transaction;
@@ -56,20 +58,23 @@ public class TransactionDetailFragment extends BaseFragment {
                         transactionItem.getTransaction().getUpdatedTransactionDate()
                 );
                 categoryId = transaction.getCategoryId();
+                savingId = transaction.getSavingId();
                 binding.txtTitle.setText(transactionItem.getTransaction().getTransactionTitle());
                 binding.txtDescription.setText(transactionItem.getTransaction().getTransactionDescription());
                 binding.lbCategoryTitle.setText(transactionItem.getCategory().getCategoryTitle());
                 binding.txtAmount.setText(String.valueOf(transactionItem.getTransaction().getTransactionAmount()));
                 binding.imgCategoryIcon.setImageResource(transactionItem.getCategory().getCategoryResId());
+                if (transactionItem.getSaving() != null) {
+                    binding.lbSaving.setText(transactionItem.getSaving().getTitle());
+                }
+
             });
         }
     }
 
     @Override
     public void initEvents() {
-        binding.btnBack.setOnClickListener(view -> {
-            pop(view);
-        });
+        binding.btnBack.setOnClickListener(this::pop);
 
         binding.layoutCategory.setOnClickListener(view -> {
             viewModel.getCategories().observe(getViewLifecycleOwner(), categories -> {
@@ -91,7 +96,8 @@ public class TransactionDetailFragment extends BaseFragment {
                         title,
                         amount,
                         description,
-                        categoryId
+                        categoryId,
+                        savingId
                 );
                 viewModel.createTransaction(transaction);
                 pop(view);
@@ -100,7 +106,8 @@ public class TransactionDetailFragment extends BaseFragment {
                         title,
                         description,
                         amount,
-                        categoryId
+                        categoryId,
+                        savingId
                 );
                 Log.d("HIHI", transaction.getTransactionTitle());
                 viewModel.updateTransaction(transaction);
@@ -121,6 +128,15 @@ public class TransactionDetailFragment extends BaseFragment {
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         });
+
+        binding.cardSaving.setOnClickListener(view -> {
+            viewModel.getAllSavings().observe(getViewLifecycleOwner(), savings -> {
+                showDialogPickSaving(content -> {
+                    binding.lbSaving.setText(content.getTitle());
+                    savingId = content.getId();
+                }, savings);
+            });
+        });
     }
 
     private void showDialogPickIcon(OnItemClick<Category> onClick, List<Category> categories) {
@@ -135,6 +151,22 @@ public class TransactionDetailFragment extends BaseFragment {
         gridView.setOnItemClickListener((adapterView, view, i, l) -> {
             dialog.dismiss();
             onClick.onClick(categories.get(i));
+        });
+        dialog.show();
+    }
+
+    private void showDialogPickSaving(OnItemClick<Saving> onClick, List<Saving> savings) {
+        GridView gridView = new GridView(requireContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setView(gridView);
+        builder.setTitle("Choose Saving");
+        builder.setCancelable(true);
+        AlertDialog dialog = builder.create();
+        gridView.setAdapter(new SelectSavingAdapter(requireContext(), savings, onClick));
+        gridView.setNumColumns(1);
+        gridView.setOnItemClickListener((adapterView, view, i, l) -> {
+            dialog.dismiss();
+            onClick.onClick(savings.get(i));
         });
         dialog.show();
     }

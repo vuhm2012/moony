@@ -33,6 +33,14 @@ public class SavingFragment extends BaseFragment {
             getActivityViewById(R.id.bottom_bar).setVisibility(View.VISIBLE);
         }
     }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        if (getActivityViewById(R.id.bottom_bar).getVisibility() == View.VISIBLE) {
+//            getActivityViewById(R.id.bottom_bar).setVisibility(View.GONE);
+//        }
+//    }
 
     @Override
     public void initControls(Bundle savedInstanceState) {
@@ -43,6 +51,7 @@ public class SavingFragment extends BaseFragment {
                 binding.imgNoData.setVisibility(View.VISIBLE);
             } else {
                 adapter = new SavingAdapter(savings, data -> {
+                    getActivityViewById(R.id.bottom_bar).setVisibility(View.GONE);
                     Saving item = (Saving) data;
                     SavingFragmentDirections.ActionSavingFragmentToSavingDetailFragment action =
                             SavingFragmentDirections.actionSavingFragmentToSavingDetailFragment();

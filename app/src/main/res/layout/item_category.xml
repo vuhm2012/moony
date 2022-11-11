@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:text="Number of transaction"
             android:textSize="16sp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/img_category"
             app:layout_constraintLeft_toLeftOf="@id/lb_category_title" />
 
@@ -49,6 +50,7 @@
             android:layout_height="wrap_content"
             android:text="20"
             android:textSize="16sp"
+            android:visibility="invisible"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/lb_saving_amount" />
 

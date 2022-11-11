@@ -31,6 +31,7 @@
             android:text="- 1,222,3000"
             android:textColor="@color/color_red"
             android:textSize="16sp"
+            android:visibility="invisible"
             app:layout_constraintLeft_toLeftOf="@id/lb_saving_title"
             app:layout_constraintTop_toBottomOf="@id/lb_saving_title" />
 
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content"
             android:text="- 1,222,3000"
             android:textColor="@color/color_red"
-            android:textSize="16sp"
+            android:textSize="32sp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lb_saving_title" />
 
@@ -48,6 +49,7 @@
             android:id="@+id/prg_saving"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             app:layout_constraintLeft_toLeftOf="@id/lb_saving_amount"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lb_saving_amount" />
@@ -72,7 +74,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Created at: 20/12/2022" />
+                android:text="Created at: 20/12/2022"
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/lb_created_at"
@@ -80,7 +83,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="Updated at: 20/12/2022" />
+                android:text="Updated at: 20/12/2022"
+                android:visibility="invisible" />
 
         </LinearLayout>
 
