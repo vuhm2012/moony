@@ -48,7 +48,7 @@ public class SavingFragment extends BaseFragment {
                             SavingFragmentDirections.actionSavingFragmentToSavingDetailFragment();
                     action.setSavingId(item.getId());
                     Navigation.findNavController(this.getView()).navigate(action);
-                }, 20);
+                }, getParentFragment().getActivity());
                 binding.rcvSavings.setLayoutManager(new LinearLayoutManager(baseContext));
                 binding.rcvSavings.setAdapter(adapter);
             }
