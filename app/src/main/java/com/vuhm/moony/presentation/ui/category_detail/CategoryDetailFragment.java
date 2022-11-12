@@ -87,17 +87,33 @@ public class CategoryDetailFragment extends BaseFragment {
         binding.btnBack.setOnClickListener(this::pop);
 
         binding.btnSave.setOnClickListener(view -> {
-            if (isCreate) {
-                createCategory();
-                pop(view);
+            if (binding.txtTitle.getText().toString().isEmpty()) {
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Missing data")
+                        .setMessage("Title must not be null")
+                        .setNegativeButton(android.R.string.ok, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            } else if (iconResId == -1) {
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Missing data")
+                        .setMessage("Icon must not be null")
+                        .setNegativeButton(android.R.string.ok, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
             } else {
-                category.updateCategory(
-                        binding.txtTitle.getText().toString(),
-                        iconResId,
-                        binding.rdgIsIncome.getCheckedRadioButtonId() == R.id.rdb_income
-                );
-                viewModel.updateCategory(category);
-                pop(view);
+                if (isCreate) {
+                    createCategory();
+                    pop(view);
+                } else {
+                    category.updateCategory(
+                            binding.txtTitle.getText().toString(),
+                            iconResId,
+                            binding.rdgIsIncome.getCheckedRadioButtonId() == R.id.rdb_income
+                    );
+                    viewModel.updateCategory(category);
+                    pop(view);
+                }
             }
         });
 

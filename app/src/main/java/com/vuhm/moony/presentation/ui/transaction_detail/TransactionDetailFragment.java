@@ -88,31 +88,54 @@ public class TransactionDetailFragment extends BaseFragment {
         });
 
         binding.btnSave.setOnClickListener(view -> {
-            String title = binding.txtTitle.getText().toString();
-            double amount = Double.parseDouble(binding.txtAmount.getText().toString());
-            String description = binding.txtDescription.getText().toString();
-            if (isCreate) {
-                transaction = new Transaction(
-                        title,
-                        amount,
-                        description,
-                        categoryId,
-                        savingId
-                );
-                viewModel.createTransaction(transaction);
-                pop(view);
+            if (binding.txtTitle.getText().toString().isEmpty()) {
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Missing data")
+                        .setMessage("Title must not be null")
+                        .setNegativeButton(android.R.string.ok, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            } else if (binding.txtAmount.getText().toString().isEmpty()) {
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Missing data")
+                        .setMessage("Amount must not be null")
+                        .setNegativeButton(android.R.string.ok, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            } else if (categoryId == null) {
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Missing data")
+                        .setMessage("Category must not be null")
+                        .setNegativeButton(android.R.string.ok, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
             } else {
-                transaction.updateTransaction(
-                        title,
-                        description,
-                        amount,
-                        categoryId,
-                        savingId
-                );
-                Log.d("HIHI", transaction.getTransactionTitle());
-                viewModel.updateTransaction(transaction);
-                Log.d("HIHI", transaction.getTransactionTitle());
-                pop(view);
+                String title = binding.txtTitle.getText().toString();
+                double amount = Double.parseDouble(binding.txtAmount.getText().toString());
+                String description = binding.txtDescription.getText().toString();
+                if (isCreate) {
+                    transaction = new Transaction(
+                            title,
+                            amount,
+                            description,
+                            categoryId,
+                            savingId
+                    );
+                    viewModel.createTransaction(transaction);
+                    pop(view);
+                } else {
+                    transaction.updateTransaction(
+                            title,
+                            description,
+                            amount,
+                            categoryId,
+                            savingId
+                    );
+                    Log.d("HIHI", transaction.getTransactionTitle());
+                    viewModel.updateTransaction(transaction);
+                    Log.d("HIHI", transaction.getTransactionTitle());
+                    pop(view);
+                }
             }
         });
 

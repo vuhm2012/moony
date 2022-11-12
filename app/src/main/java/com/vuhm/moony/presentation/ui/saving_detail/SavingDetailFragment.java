@@ -67,7 +67,7 @@ public class SavingDetailFragment extends BaseFragment {
                 action.setTransactionId(item.getTransaction().getTransactionId());
                 Navigation.findNavController(this.getView()).navigate(action);
             });
-            if(saving != null) {
+            if (saving != null) {
                 double percent = totalAmount / saving.getGoal();
                 binding.prgSaving.setProgress(Double.valueOf(percent * 100).intValue());
                 binding.lbTotalSaving.setText(String.valueOf(totalAmount));
@@ -83,22 +83,38 @@ public class SavingDetailFragment extends BaseFragment {
         binding.btnBack.setOnClickListener(this::pop);
 
         binding.btnSave.setOnClickListener(view -> {
-            if(isCreate) {
-                Saving saving = new Saving(
-                        binding.txtTitle.getText().toString(),
-                        binding.txtDescription.getText().toString(),
-                        Double.parseDouble(binding.txtGoal.getText().toString())
-                );
-                viewModel.createSaving(saving);
-                pop(view);
+            if (binding.txtTitle.getText().toString().isEmpty()) {
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Missing data")
+                        .setMessage("Title must not be null")
+                        .setNegativeButton(android.R.string.ok, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            } else if (binding.txtGoal.getText().toString().isEmpty()) {
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Missing data")
+                        .setMessage("Goal must not be null")
+                        .setNegativeButton(android.R.string.ok, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
             } else {
-                saving.updateSaving(
-                        binding.txtTitle.getText().toString(),
-                        binding.txtDescription.getText().toString(),
-                        Double.parseDouble(binding.txtGoal.getText().toString())
-                );
-                viewModel.updateSaving(saving);
-                pop(view);
+                if (isCreate) {
+                    Saving saving = new Saving(
+                            binding.txtTitle.getText().toString(),
+                            binding.txtDescription.getText().toString(),
+                            Double.parseDouble(binding.txtGoal.getText().toString())
+                    );
+                    viewModel.createSaving(saving);
+                    pop(view);
+                } else {
+                    saving.updateSaving(
+                            binding.txtTitle.getText().toString(),
+                            binding.txtDescription.getText().toString(),
+                            Double.parseDouble(binding.txtGoal.getText().toString())
+                    );
+                    viewModel.updateSaving(saving);
+                    pop(view);
+                }
             }
         });
 
@@ -113,7 +129,6 @@ public class SavingDetailFragment extends BaseFragment {
                     .setNegativeButton(android.R.string.no, null)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
-
         });
     }
 }
