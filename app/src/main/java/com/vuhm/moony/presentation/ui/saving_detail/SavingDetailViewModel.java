@@ -28,6 +28,10 @@ public class SavingDetailViewModel extends BaseViewModel {
         repository.createSaving(saving).subscribeOn(Schedulers.io()).subscribe();
     }
 
+    public void updateSaving(Saving saving) {
+        repository.updateSaving(saving).subscribeOn(Schedulers.io()).subscribe();
+    }
+
     public void deleteSaving(String savingId) {
         repository.deleteSavingById(savingId).subscribeOn(Schedulers.io()).subscribe();
     }

@@ -23,6 +23,7 @@ public class SavingDetailFragment extends BaseFragment {
     private FragmentSavingDetailBinding binding;
     private SavingDetailViewModel viewModel;
     private TransactionAdapter adapter;
+    private boolean isCreate = true;
     private String savingId;
     private Saving saving;
     private double totalAmount;
@@ -39,6 +40,7 @@ public class SavingDetailFragment extends BaseFragment {
         viewModel = new ViewModelProvider(this).get(SavingDetailViewModel.class);
         if (!savingId.equals("-1") && savingId != null) {
             binding.btnDelete.setVisibility(View.VISIBLE);
+            isCreate = false;
             viewModel.getSavingById(savingId).observe(getViewLifecycleOwner(), savings -> {
                 saving = savings.get(0);
                 binding.txtTitle.setText(saving.getTitle());
@@ -65,9 +67,13 @@ public class SavingDetailFragment extends BaseFragment {
                 action.setTransactionId(item.getTransaction().getTransactionId());
                 Navigation.findNavController(this.getView()).navigate(action);
             });
-            double percent = totalAmount / saving.getGoal();
-            binding.prgSaving.setProgress(Double.valueOf(percent * 100).intValue());
-            binding.lbTotalSaving.setText(String.valueOf(totalAmount));
+            if(saving != null) {
+                double percent = totalAmount / saving.getGoal();
+                binding.prgSaving.setProgress(Double.valueOf(percent * 100).intValue());
+                binding.lbTotalSaving.setText(String.valueOf(totalAmount));
+            } else {
+                binding.lbTotalSaving.setText(String.valueOf(0));
+            }
             binding.rcvTransactions.setAdapter(adapter);
         });
     }
@@ -77,13 +83,23 @@ public class SavingDetailFragment extends BaseFragment {
         binding.btnBack.setOnClickListener(this::pop);
 
         binding.btnSave.setOnClickListener(view -> {
-            Saving saving = new Saving(
-                    binding.txtTitle.getText().toString(),
-                    binding.txtDescription.getText().toString(),
-                    Double.parseDouble(binding.txtGoal.getText().toString())
-            );
-            viewModel.createSaving(saving);
-            pop(view);
+            if(isCreate) {
+                Saving saving = new Saving(
+                        binding.txtTitle.getText().toString(),
+                        binding.txtDescription.getText().toString(),
+                        Double.parseDouble(binding.txtGoal.getText().toString())
+                );
+                viewModel.createSaving(saving);
+                pop(view);
+            } else {
+                saving.updateSaving(
+                        binding.txtTitle.getText().toString(),
+                        binding.txtDescription.getText().toString(),
+                        Double.parseDouble(binding.txtGoal.getText().toString())
+                );
+                viewModel.updateSaving(saving);
+                pop(view);
+            }
         });
 
         binding.btnDelete.setOnClickListener(view -> {

@@ -10,7 +10,7 @@ public class Saving {
     private String description;
     private double goal;
     private final Date createdAt;
-    private final Date updatedAt;
+    private Date updatedAt;
 
     public Saving() {
         this.id = UUID.randomUUID().toString();
@@ -65,5 +65,16 @@ public class Saving {
 
     public Date getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void updateSaving(
+            String title,
+            String description,
+            double goal
+    ) {
+        this.title = title;
+        this.description = description;
+        this.goal = goal;
+        this.updatedAt = Calendar.getInstance().getTime();
     }
 }
