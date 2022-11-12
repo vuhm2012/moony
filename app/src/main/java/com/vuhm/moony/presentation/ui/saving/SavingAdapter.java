@@ -1,6 +1,5 @@
 package com.vuhm.moony.presentation.ui.saving;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.progressindicator.LinearProgressIndicator;
@@ -24,16 +22,12 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
 
     private final List<Saving> savings;
     private final OnItemClick<Saving> listener;
-    private final FragmentActivity fragmentActivity;
-
     public SavingAdapter(
             List<Saving> savings,
-            OnItemClick listener,
-            FragmentActivity fragmentActivity
+            OnItemClick listener
     ) {
         this.savings = savings;
         this.listener = listener;
-        this.fragmentActivity = fragmentActivity;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -97,16 +91,6 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Saving item = savings.get(position);
-        SavingViewModel viewModel = new ViewModelProvider(fragmentActivity).get(SavingViewModel.class);
-        viewModel.getSavingAmount(item.getId());
-        viewModel.sumLiveData.observe(fragmentActivity, amount -> {
-            Log.d("HIHI", amount.toString());
-            holder.getLbSavingAmount().setText(String.valueOf(amount));
-            holder.getPrgSaving().setProgress(Integer.parseInt(amount.toString()));
-        });
-//        double amount = viewModel.getSavingAmount(item.getId());
-//        holder.getLbSavingAmount().setText(String.valueOf(amount));
-//        holder.getPrgSaving().setProgress(Integer.parseInt(String.valueOf(amount)));
         Log.d("HIHI", "hehe");
         holder.getLbSavingTitle().setText(item.getTitle());
         holder.getCardSaving().setOnClickListener(view -> listener.onClick(item));

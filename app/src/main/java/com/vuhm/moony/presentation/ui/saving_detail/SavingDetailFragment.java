@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.vuhm.moony.R;
 import com.vuhm.moony.databinding.FragmentSavingDetailBinding;
 import com.vuhm.moony.domain.model.Saving;
+import com.vuhm.moony.domain.model.TransactionItem;
 import com.vuhm.moony.presentation.base.BaseFragment;
+import com.vuhm.moony.presentation.ui.transaction.TransactionAdapter;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -18,8 +22,10 @@ public class SavingDetailFragment extends BaseFragment {
 
     private FragmentSavingDetailBinding binding;
     private SavingDetailViewModel viewModel;
+    private TransactionAdapter adapter;
     private String savingId;
     private Saving saving;
+    private double totalAmount;
 
     @Override
     public int getLayoutId() {
@@ -40,6 +46,30 @@ public class SavingDetailFragment extends BaseFragment {
                 binding.txtGoal.setText(String.valueOf(saving.getGoal()));
             });
         }
+
+        binding.rcvTransactions.setLayoutManager(new LinearLayoutManager(baseContext));
+        viewModel.getTransactionBySaving(savingId).observe(getViewLifecycleOwner(), transactionItems -> {
+            totalAmount = 0;
+            for (int i = 0; i < transactionItems.size(); i++) {
+                if (transactionItems.get(i).getCategory().isIncome()) {
+                    totalAmount -= transactionItems.get(i).getTransaction().getTransactionAmount();
+                } else {
+                    totalAmount += transactionItems.get(i).getTransaction().getTransactionAmount();
+                }
+
+            }
+            adapter = new TransactionAdapter(requireContext(), transactionItems, data -> {
+                TransactionItem item = (TransactionItem) data;
+                SavingDetailFragmentDirections.ActionSavingDetailFragmentToTransactionDetailFragment action =
+                        SavingDetailFragmentDirections.actionSavingDetailFragmentToTransactionDetailFragment();
+                action.setTransactionId(item.getTransaction().getTransactionId());
+                Navigation.findNavController(this.getView()).navigate(action);
+            });
+            double percent = totalAmount / saving.getGoal();
+            binding.prgSaving.setProgress(Double.valueOf(percent * 100).intValue());
+            binding.lbTotalSaving.setText(String.valueOf(totalAmount));
+            binding.rcvTransactions.setAdapter(adapter);
+        });
     }
 
     @Override

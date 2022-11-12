@@ -36,14 +36,6 @@ public class TransactionFragment extends BaseFragment {
         }
     }
 
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        if (getActivityViewById(R.id.bottom_bar).getVisibility() == View.VISIBLE) {
-//            getActivityViewById(R.id.bottom_bar).setVisibility(View.GONE);
-//        }
-//    }
-
     @Override
     public void initControls(Bundle savedInstanceState) {
         binding = (FragmentTransactionBinding) getBinding();

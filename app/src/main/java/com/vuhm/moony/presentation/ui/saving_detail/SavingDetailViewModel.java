@@ -3,6 +3,7 @@ package com.vuhm.moony.presentation.ui.saving_detail;
 import androidx.lifecycle.LiveData;
 
 import com.vuhm.moony.domain.model.Saving;
+import com.vuhm.moony.domain.model.TransactionItem;
 import com.vuhm.moony.domain.repository.SavingRepository;
 import com.vuhm.moony.presentation.base.BaseViewModel;
 
@@ -33,5 +34,9 @@ public class SavingDetailViewModel extends BaseViewModel {
 
     public LiveData<List<Saving>> getSavingById(String id) {
         return fromObservableToLiveData(repository.getSavingById(id));
+    }
+
+    public LiveData<List<TransactionItem>> getTransactionBySaving(String id) {
+        return fromObservableToLiveData(repository.getTransactionsBySaving(id));
     }
 }

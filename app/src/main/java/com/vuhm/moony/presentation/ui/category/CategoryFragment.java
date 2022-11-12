@@ -34,14 +34,6 @@ public class CategoryFragment extends BaseFragment {
             getActivityViewById(R.id.bottom_bar).setVisibility(View.VISIBLE);
         }
     }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        if (getActivityViewById(R.id.bottom_bar).getVisibility() == View.VISIBLE) {
-//            getActivityViewById(R.id.bottom_bar).setVisibility(View.GONE);
-//        }
-//    }
 
     @Override
     public void initControls(Bundle savedInstanceState) {

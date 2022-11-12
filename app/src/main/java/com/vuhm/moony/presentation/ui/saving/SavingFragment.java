@@ -33,14 +33,6 @@ public class SavingFragment extends BaseFragment {
             getActivityViewById(R.id.bottom_bar).setVisibility(View.VISIBLE);
         }
     }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        if (getActivityViewById(R.id.bottom_bar).getVisibility() == View.VISIBLE) {
-//            getActivityViewById(R.id.bottom_bar).setVisibility(View.GONE);
-//        }
-//    }
 
     @Override
     public void initControls(Bundle savedInstanceState) {
@@ -57,7 +49,7 @@ public class SavingFragment extends BaseFragment {
                             SavingFragmentDirections.actionSavingFragmentToSavingDetailFragment();
                     action.setSavingId(item.getId());
                     Navigation.findNavController(this.getView()).navigate(action);
-                }, getParentFragment().getActivity());
+                });
                 binding.rcvSavings.setLayoutManager(new LinearLayoutManager(baseContext));
                 binding.rcvSavings.setAdapter(adapter);
             }

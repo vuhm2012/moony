@@ -54,7 +54,16 @@
     <fragment
         android:id="@+id/savingDetailFragment"
         android:name="com.vuhm.moony.presentation.ui.saving_detail.SavingDetailFragment"
-        android:label="SavingDetailFragment" />
+        android:label="SavingDetailFragment">
+        <action
+            android:id="@+id/action_savingDetailFragment_to_transactionDetailFragment"
+            app:destination="@id/transactionDetailFragment">
+            <argument
+                android:name="transactionId"
+                android:defaultValue="-1"
+                app:argType="string" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/categoryDetailFragment"
         android:name="com.vuhm.moony.presentation.ui.category_detail.CategoryDetailFragment"
