@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vuhm.moony.R;
 import com.vuhm.moony.core.utils.OnItemClick;
 import com.vuhm.moony.domain.model.TransactionItem;
+import com.vuhm.moony.presentation.ui.Utils;
 
 import java.util.List;
 
@@ -100,8 +101,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         holder.getLbTransactionAmount().setText(String.valueOf(item.getTransaction().getTransactionAmount()));
         holder.lbTransactionDescription.setText(item.getTransaction().getTransactionDescription());
         holder.getImgIcon().setImageResource(item.getCategory().getCategoryResId());
-        holder.getLbCreate().setText(item.getTransaction().getCreatedTransactionDate().toString());
-        holder.getLbUpdate().setText(item.getTransaction().getUpdatedTransactionDate().toString());
+        holder.getLbCreate().setText("Created at: " + Utils.convertDateToString(item.getTransaction().getCreatedTransactionDate()));
+        holder.getLbUpdate().setText("Updated at: " + Utils.convertDateToString(item.getTransaction().getUpdatedTransactionDate()));
         if (item.getCategory().isIncome()) {
             holder.getImgIcon().setColorFilter(context.getResources().getColor(R.color.color_green));
             holder.getImgType().setImageResource(R.drawable.ic_income);
